@@ -4775,8 +4775,6 @@ GameObject:
   - component: {fileID: 393531854}
   - component: {fileID: 393531853}
   - component: {fileID: 393531852}
-  - component: {fileID: 393531857}
-  - component: {fileID: 393531856}
   m_Layer: 10
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4857,30 +4855,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 45, y: 361.121, z: 0}
---- !u!114 &393531856
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393531851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &393531857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393531851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &397176941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8406,6 +8380,8 @@ MonoBehaviour:
   passableValues: 
   goalPos: {x: 0, y: 0}
   playerPos: {x: 0, y: 0}
+  player: {fileID: 1594322790}
+  goal: {fileID: 1071076054}
 --- !u!1001 &629338683
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19992,6 +19968,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Water 01 (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 1640771308685042, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4115408997890500, guid: ff78edb367a079b4a8f8ae2d128c581f, type: 3}
       propertyPath: m_RootOrder
       value: 42
@@ -20864,6 +20844,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4562075604489022, guid: 1b8fbee291cdc1046a281cb2b3b51bf7, type: 3}
   m_PrefabInstance: {fileID: 1593970531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1594322790 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400080, guid: 9759788f6132dd84da11e946ab72d663, type: 3}
+  m_PrefabInstance: {fileID: 821313709}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1594382034
 PrefabInstance:

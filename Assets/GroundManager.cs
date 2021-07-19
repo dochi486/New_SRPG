@@ -12,7 +12,14 @@ public class GroundManager : MonoBehaviour
     public Transform player;
     public Transform goal;
 
+
+    [ContextMenu("길 찾기 테스트")] //컨텍스트 메뉴로도 코루틴 작동하는지?
     void Start()
+    {
+        StartCoroutine(FindPath());
+    }
+
+    IEnumerator FindPath()
     {
         passableValues = new List<int>();
         passableValues.Add((int)BlockType.Walkable);
@@ -34,6 +41,16 @@ public class GroundManager : MonoBehaviour
         goalPos.y = (int)goal.position.z;
 
         var path = PathFinding2D.find4(playerPos, goalPos, map, passableValues);
-
+        if (path.Count == 0)
+            Debug.Log("길이 없다.");
+        else
+        {
+            foreach (var item in path)
+            {
+                Vector3 playerNewPos = new Vector3(item.x, 0, item.y);
+                player.position = playerNewPos;
+                yield return new WaitForSeconds(0.5f);
+            }
+        }
     }
 }
