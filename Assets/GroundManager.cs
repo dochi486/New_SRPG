@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class GroundManager : SingletonMonoBehavior<GroundManager>
 {
@@ -55,13 +56,18 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             Debug.Log("길이 없다.");
         else
         {
+            Player.SelectedPlayer.PlayAnimation("Walk");
             foreach (var item in path)
             {
                 Vector3 playerNewPos = new Vector3(item.x, 0, item.y);
                 player.LookAt(playerNewPos);
-                player.position = playerNewPos;
-                yield return new WaitForSeconds(0.5f);
+                //player.position = playerNewPos;
+                player.DOMove(playerNewPos, moveTimePerUnit).SetEase(moveEase);
+                yield return new WaitForSeconds(moveTimePerUnit);
             }
+            Player.SelectedPlayer.PlayAnimation("Idle");
         }
     }
+    public Ease moveEase = Ease.InBounce;
+    public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 }
