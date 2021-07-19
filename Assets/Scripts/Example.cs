@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,21 +59,7 @@ public class Example : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 150, 30), "pathfinding 4"))
-        {
-            message = "finding...";
-            simPathFinding4();
-        }
-        if (GUI.Button(new Rect(10, 50, 150, 30), "pathfinding 6X"))
-        {
-            message = "finding...";
-            simPathFinding6();
-        }
-        if (GUI.Button(new Rect(10, 90, 150, 30), "pathfinding 6Y"))
-        {
-            message = "finding...";
-            simPathFinding6(false);
-        }
+
 
         GUI.Label(new Rect(180, 20, 300, 30), message);
     }
@@ -81,77 +67,6 @@ public class Example : MonoBehaviour
     /**
      * simulate path finding in grid tilemaps
      */
-    public void simPathFinding4()
-    {
-        StopAllCoroutines();
-
-        //init map
-        var map = mapToDict4(generateMapArray(width, height));
-        float xScale = scale;
-        float yScale = scale;
-        renderMap(map, xScale, yScale);
-
-        //init player and goal
-        var playerPos = new Vector2Int(0, 0);
-        map[playerPos] = (int)TileType.none;
-        setTransformPosition(player.transform, playerPos, xScale, yScale);
-        var goalPos = new Vector2Int(width - 1, height - 1);
-        map[goalPos] = (int)TileType.none;
-        setTransformPosition(goal.transform, goalPos, xScale, yScale);
-
-        //finding
-        var path = PathFinding2D.find4(playerPos, goalPos, map, passableValues);
-        if (path.Count == 0)
-        {
-            message = "oops! cant find goal";
-        }
-        else
-        {
-            StartCoroutine(movePlayer(path, xScale, yScale, .2f));
-        }
-    }
-
-    /**
-     * simulate path finding in hexagonal grid tilemaps
-     */
-    public void simPathFinding6(bool staggerByRow = true)
-    {
-        StopAllCoroutines();
-
-        //init map
-        var map = mapToDict6(generateMapArray(width, height), staggerByRow);
-        var hexScale = scale + 4f; //addtional 4f makes tiles seperated
-        float xScale = staggerByRow ? hexScale / 2 : hexScale;
-        float yScale = staggerByRow ? hexScale : hexScale/2;
-        renderMap(map, xScale, yScale);
-
-        //init player and goal
-        var mapPoses = map.Keys.ToList();
-        mapPoses.Sort((a, b) => a.x + a.y - b.x - b.y);
-        var playerPos = mapPoses.First();
-        map[playerPos] = (int)TileType.none;
-        setTransformPosition(player.transform, playerPos, xScale, yScale);
-        var goalPos = mapPoses.Last();
-        map[goalPos] = (int)TileType.none;
-        setTransformPosition(goal.transform, goalPos, xScale, yScale);
-
-        //find
-        List<Vector2Int> path;
-        if (staggerByRow) {
-            path = PathFinding2D.find6X(playerPos, goalPos, map, passableValues);
-        } else {
-            path = PathFinding2D.find6Y(playerPos, goalPos, map, passableValues);
-        }
-        if (path.Count == 0)
-        {
-            message = "oops! cant find goal";
-        }
-        else
-        {
-            StartCoroutine(movePlayer(path, xScale, yScale, .2f));
-        }
-    }
-
 
     void setTransformPosition(Transform trans, Vector2Int pos, float xScale, float yScale)
     {
@@ -204,51 +119,17 @@ public class Example : MonoBehaviour
         return mapArray;
     }
 
-    Dictionary<Vector2Int, int> mapToDict4(int[,] mapArray)
-    {
-        Dictionary<Vector2Int, int> mapDict = new Dictionary<Vector2Int, int>();
-        for (int x = 0; x < mapArray.GetLength(0); x++)
-        {
-            for (int y = 0; y < mapArray.GetLength(1); y++)
-            {
-                mapDict.Add(new Vector2Int(x, y), mapArray[x, y]);
-            }
-        }
-        return mapDict;
-    }
+    //Dictionary<Vector2Int, int> mapToDict4(int[,] mapArray)
+    //{
+    //    Dictionary<Vector2Int, int> mapDict = new Dictionary<Vector2Int, int>();
+    //    for (int x = 0; x < mapArray.GetLength(0); x++)
+    //    {
+    //        for (int y = 0; y < mapArray.GetLength(1); y++)
+    //        {
+    //            mapDict.Add(new Vector2Int(x, y), mapArray[x, y]);
+    //        }
+    //    }
+    //    return mapDict;
+    //}
 
-    Dictionary<Vector2Int, int> mapToDict6(int[,] mapArray, bool stretchRow)
-    {
-        Dictionary<Vector2Int, int> mapDict = new Dictionary<Vector2Int, int>();
-        for (int x = 0; x < mapArray.GetLength(0); x++)
-        {
-            for (int y = 0; y < mapArray.GetLength(1); y++)
-            {
-                if (stretchRow)
-                {
-                    if (y % 2 == 0)
-                    {
-                        mapDict.Add(new Vector2Int(2 * x, y), mapArray[x, y]);
-                    }
-                    else
-                    {
-                        mapDict.Add(new Vector2Int(2 * x + 1, y), mapArray[x, y]);
-                    }
-                }
-                else
-                {
-                    if (x % 2 == 0)
-                    {
-                        mapDict.Add(new Vector2Int(x, 2 * y), mapArray[x, y]);
-                    }
-                    else
-                    {
-                        mapDict.Add(new Vector2Int(x, 2 * y + 1), mapArray[x, y]);
-                    }
-                }
-
-            }
-        }
-        return mapDict;
-    }
 }
