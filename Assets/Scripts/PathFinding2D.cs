@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using UnityEngine;
 
 public static class PathFinding2D
 {
@@ -47,7 +47,7 @@ public static class PathFinding2D
             {
                 result.Add(finalNode.pos);
                 finalNode = finalNode.preNode;
-            } 
+            }
         }
         result.Reverse();
         return result;
@@ -57,7 +57,8 @@ public static class PathFinding2D
                          Dictionary<Vector2Int, BlockType> map, Vector2Int to, out Node finalNode, BlockType passableValues,
                       Func<Vector2Int, Vector2Int, float> getDistance, Func<Vector2Int, List<Vector2Int>> getNeighbors)
     {
-        if (currentNode == null) {
+        if (currentNode == null)
+        {
             finalNode = null;
             return false;
         }
@@ -71,8 +72,7 @@ public static class PathFinding2D
 
         foreach (var item in getNeighbors(currentNode.pos))
         {
-            //Player, Monster
-            //    //
+
             if (map.ContainsKey(item) && passableValues.HasFlag(map[item]))
             {
                 findTemp(openList, currentNode, item, to, getDistance);
@@ -99,7 +99,7 @@ public static class PathFinding2D
         }
     }
 
-    class Node:IComparable
+    class Node : IComparable
     {
         public Node preNode;
         public Vector2Int pos;
@@ -123,11 +123,12 @@ public static class PathFinding2D
 
             if (temp == null) return 1;
 
-            if (Mathf.Abs(this.fScore - temp.fScore) < 0.01f) {
+            if (Mathf.Abs(this.fScore - temp.fScore) > 0.01f)
+            {
                 return this.fScore > temp.fScore ? 1 : -1;
             }
 
-            if (Mathf.Abs(this.hScore - temp.hScore) < 0.01f)
+            if (Mathf.Abs(this.hScore - temp.hScore) > 0.01f)
             {
                 return this.hScore > temp.hScore ? 1 : -1;
             }

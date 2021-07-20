@@ -6276,12 +6276,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   completeUiInite: 0
-  passableValues: 14
-  goalPos: {x: 0, y: 0}
-  useDebugMode: 1
-  debugTextPrefab: {fileID: 562230789588128102, guid: fb300b8cf1ee1bc48867e45b8b1ecbb6, type: 3}
   playerPos: {x: 0, y: 0}
   player: {fileID: 5318336549466714879}
+  passableValues: 7
+  useDebugMode: 1
+  debugTextPrefab: {fileID: 562230789588128102, guid: fb300b8cf1ee1bc48867e45b8b1ecbb6, type: 3}
+  debugTextGos: []
   moveEase: 1
   moveTimePerUnit: 0.3
 --- !u!1001 &629338683
@@ -18472,7 +18472,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2950084055407692283, guid: 1b8fbee291cdc1046a281cb2b3b51bf7, type: 3}
       propertyPath: blockType
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1219471545100730, guid: 1b8fbee291cdc1046a281cb2b3b51bf7, type: 3}
       propertyPath: m_Name
@@ -21516,7 +21516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7123099442938170883, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 7123099442938170883, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
       propertyPath: m_LocalPosition.y

@@ -37,7 +37,7 @@ public class BlockInfo : MonoBehaviour
         //처음 클릭했던 위치와 비교하여 clickDistance보다 크다면 나가자
         if (Vector3.Distance(downMousePosition, upMousePosition) > clickDistance)
         {
-            Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
+            //Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
             return;
         }
         //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
