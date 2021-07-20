@@ -43,7 +43,7 @@ public class BlockInfo : MonoBehaviour
         }
         //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
         //clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
-        GroundManager.Instance.OnTouch(transform.position);
+        Player.SelectedPlayer.OnTouch(transform.position);
     }
 
     string debugTextPrefab = "DebugTextPrefab";
