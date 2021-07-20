@@ -1,16 +1,15 @@
-﻿using DG.Tweening;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundManager : SingletonMonoBehavior<GroundManager>
 {
-   
     public Transform player;
+    // 지나갈 수 있는 타입을 미리 저장해 맵 정보에 사용할 수 있도록 하자. 전의 코드는 int형으로 저장을 했었다
+    // Walkable 과 Water(둘중 하나라도? 아마 "|" 때문에)로 지정된 블록은 지나다닐 수 있는 블록이다.
     public Dictionary<Vector2Int, BlockType> map = new Dictionary<Vector2Int, BlockType>(); //맵의 좌표로 정보 접근(맵을 지정)
-    public Dictionary<Vector2Int, BlockInfo> blockInfoMap = new Dictionary<Vector2Int, BlockInfo>();
+    // A*에서 사용
+    public Dictionary<Vector2Int, BlockInfo> blockInfoMap = new Dictionary<Vector2Int, BlockInfo>();// 맵 정보 에서 사용
+    
     public BlockType passableValues = BlockType.Water | BlockType.Walkable; //갈 수 있는 지역(밟을 수 있는 타일)을 int로 받는 것
     //public Vector2Int goalPos; //목표지점
 
@@ -23,7 +22,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
     {
         base.Awake();
 
-        var blockInfos = GetComponentsInChildren<BlockInfo>();
+        var blockInfos = GetComponentsInChildren<BlockInfo>(); //블록들의 정보들을 가져온 리스트
 
 
         debugTextGos.ForEach(x => Destroy(x));
@@ -37,7 +36,8 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
             if (useDebugMode)
             {
-                item.UpdateDebugInfo();
+                item.UpdateDebugInfo(); //블록들의 UpdateDebugINfo를 실행시켜 3D Text에 정보를 넣어 활성화
+
                 //StringBuilder debugText = new StringBuilder();/*= $"{intPos.x}:{intPos.y}"*/;
                 ////ContainingText(debugText, item, BlockType.Walkable);
 
@@ -56,8 +56,10 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
     internal void AddBlockInfo(Vector3 position, BlockType addBlockType)
     {
+        // 실행한 곳의 position 정보를 담고 있는 pos를 생성
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
-        if(map.ContainsKey(pos) == false)
+        // 만일 pos의 값이 map에 저장한 블록들의 위치와 일치하는게 없다면
+        if (map.ContainsKey(pos) == false)
         {
             Debug.LogError($"{pos} 위치에 맵이 없다");
         }

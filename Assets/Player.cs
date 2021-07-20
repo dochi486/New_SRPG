@@ -74,6 +74,7 @@ public class Player : MonoBehaviour
             FollowTarget.Instance.SetTarget(null);
             // null을 주어 카메라가 따라가지 않도록 하자
             GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player);
+            // 이동한 위치에는 플레이어 정보 추가
         }
     }
 

@@ -46,29 +46,32 @@ public class BlockInfo : MonoBehaviour
         Player.SelectedPlayer.OnTouch(transform.position);
     }
 
-    string debugTextPrefab = "DebugTextPrefab";
-    GameObject debugTextGos;
+    string debugTextPrefab = "DebugTextPrefab"; // 리소스에서 생성할 DebugTextPrefab의 이름 저장
+    GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수
     internal void UpdateDebugInfo()
     {
-        if(debugTextGos == null)
+        // 생성된 DebugTextPrefab 오브젝트가 없다면
+        if (debugTextGos == null)
         {
-            GameObject textMeshGo = Instantiate((GameObject)Resources.Load(debugTextPrefab), transform);
+            GameObject textMeshGo = Instantiate((GameObject)Resources.Load(debugTextPrefab), transform); //생성
             debugTextGos = textMeshGo;
             textMeshGo.transform.localPosition = Vector3.zero;
         }
+        // 블록의 정보를 저장하자
         StringBuilder debugText = new StringBuilder();
 
         ContainingText(debugText, BlockType.Water);
         ContainingText(debugText, BlockType.Player);
         ContainingText(debugText,  BlockType.Monster);
 
+        // block 오브젝트의 자식 중 text 컴포넌트를 찾아 debugText의 정보를 String형으로 반환 시켜 넣어 준다.(자신의 타입이 들어 갈 것임)
         GetComponentInChildren<TextMesh>().text = debugText.ToString();
     }
     private void ContainingText(StringBuilder sb, BlockType walkable)
     {
-        if (blockType.HasFlag(walkable))
+        if (blockType.HasFlag(walkable)) //만약 block의 BlockType과 walkable이 같은 타입이라면
         {
-            sb.AppendLine(walkable.ToString());
+            sb.AppendLine(walkable.ToString()); // debugText에 값을 넣어준다.
         }
     }
 }
