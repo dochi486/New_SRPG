@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class GroundManager : SingletonMonoBehavior<GroundManager>
 {
+
     public Dictionary<Vector2Int, BlockType> map = new Dictionary<Vector2Int, BlockType>(); //맵의 좌표로 정보 접근(맵을 지정)
     public BlockType passableValues = BlockType.Water | BlockType.Walkable; //갈 수 있는 지역(밟을 수 있는 타일)을 int로 받는 것
-    public Vector2Int goalPos; //목표지점
+    //public Vector2Int goalPos; //목표지점
 
     public bool useDebugMode = true;
     public GameObject debugTextPrefab;
@@ -16,7 +17,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
     internal void OnTouch(Vector3 position)
     {
 
-        Vector2Int findPos = new Vector2Int((int)position.x, (int)position.z);
+        Vector2Int findPos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         FindPath(findPos);
     }
 
@@ -33,6 +34,9 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         StartCoroutine(FindPathCo(goalPos));
     }
 
+    public List<GameObject> debugTextGos = new List<GameObject>();//디버그텍스트로그가 클릭할 때마다 생성되던 것 고치는 부분
+    //퍼블릭일 때는 new안해도 사용 가능하지만 private으로 바꿀 떄 깜빡할 수 있으니 new써주는 게 좋음
+
     IEnumerator FindPathCo(Vector2Int goalPos)
     {
         //passableValues = new List<int>(); 
@@ -40,6 +44,8 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
         //자식 오브젝트의 blockinfo 가져오기
         var blockInfos = GetComponentsInChildren<BlockInfo>();
+        debugTextGos.ForEach(x => Destroy(x));
+        debugTextGos.Clear(); //디버그텍스트로그가 클릭할 때마다 생성되던 것 고치는 부분
 
         //map 딕셔너리를 채운다
         foreach (var item in blockInfos)
@@ -51,20 +57,23 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
             if (useDebugMode)
             {
+               
                 StringBuilder debugText = new StringBuilder();/*= $"{intPos.x}:{intPos.y}"*/;
-                ContainingText(debugText, item, BlockType.Walkable);
+                //ContainingText(debugText, item, BlockType.Walkable);
                 ContainingText(debugText, item, BlockType.Water);
                 ContainingText(debugText, item, BlockType.Player);
                 ContainingText(debugText, item, BlockType.Monster);
                 //item.name = $"{item.name}: {posString}";
+
                 GameObject textMeshGo = Instantiate(debugTextPrefab, item.transform); // item은 blockinfo
+                debugTextGos.Add(textMeshGo); //디버그텍스트로그가 클릭할 때마다 생성되던 것 고치는 부분
                 textMeshGo.transform.localPosition = Vector3.zero;
                 TextMesh textMesh = textMeshGo.GetComponentInChildren<TextMesh>();
                 textMesh.text = debugText.ToString();
             }
         }
-        playerPos.x = (int)player.position.x; // 플레이어의 위치 저장
-        playerPos.y = (int)player.position.z; //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
+        playerPos.x = Mathf.RoundToInt(player.position.x); // 플레이어의 위치 저장
+        playerPos.y = Mathf.RoundToInt(player.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
 
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
