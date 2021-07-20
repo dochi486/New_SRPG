@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     {
         SelectedPlayer = this;
         animator = GetComponentInChildren<Animator>();
+        GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player);
     }
 
     public void PlayAnimation(string nodName)
