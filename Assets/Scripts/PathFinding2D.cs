@@ -71,6 +71,8 @@ public static class PathFinding2D
 
         foreach (var item in getNeighbors(currentNode.pos))
         {
+            //Player, Monster
+            //    //
             if (map.ContainsKey(item) && passableValues.HasFlag(map[item]))
             {
                 findTemp(openList, currentNode, item, to, getDistance);
