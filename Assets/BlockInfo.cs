@@ -3,10 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[Flags] //중복체크가 가능한 flag로 인스펙터에서 보임
+
 public enum BlockType
 {
-    Walkable,
-    Water,
+    None           =0,
+    Walkable     = 1<<0,
+    Water          = 1 <<1,
+    Player         = 1 << 2,
+    Monster       = 1<< 3,
 }
 
 public class BlockInfo : MonoBehaviour

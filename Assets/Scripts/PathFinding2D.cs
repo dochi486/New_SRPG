@@ -8,7 +8,7 @@ public static class PathFinding2D
     /**
      * find a path in grid tilemaps
      */
-    public static List<Vector2Int> find4(Vector2Int from, Vector2Int to, Dictionary<Vector2Int, int> map, List<int> passableValues)
+    public static List<Vector2Int> find4(Vector2Int from, Vector2Int to, Dictionary<Vector2Int, BlockType> map, BlockType passableValues)
     {
         Func<Vector2Int, Vector2Int, float> getDistance = delegate (Vector2Int a, Vector2Int b)
         {
@@ -30,7 +30,7 @@ public static class PathFinding2D
     }
 
 
-    static List<Vector2Int> astar(Vector2Int from, Vector2Int to, Dictionary<Vector2Int, int> map, List<int> passableValues,
+    static List<Vector2Int> astar(Vector2Int from, Vector2Int to, Dictionary<Vector2Int, BlockType> map, BlockType passableValues,
                       Func<Vector2Int, Vector2Int, float> getDistance, Func<Vector2Int, List<Vector2Int>> getNeighbors)
     {
         var result = new List<Vector2Int>();
@@ -54,7 +54,7 @@ public static class PathFinding2D
     }
 
     static bool findDest(Node currentNode, List<Node> openList,
-                         Dictionary<Vector2Int, int> map, Vector2Int to, out Node finalNode, List<int> passableValues,
+                         Dictionary<Vector2Int, BlockType> map, Vector2Int to, out Node finalNode, BlockType passableValues,
                       Func<Vector2Int, Vector2Int, float> getDistance, Func<Vector2Int, List<Vector2Int>> getNeighbors)
     {
         if (currentNode == null) {
@@ -71,7 +71,7 @@ public static class PathFinding2D
 
         foreach (var item in getNeighbors(currentNode.pos))
         {
-            if (map.ContainsKey(item) && passableValues.Contains(map[item]))
+            if (map.ContainsKey(item) && passableValues.HasFlag(map[item]))
             {
                 findTemp(openList, currentNode, item, to, getDistance);
             }
