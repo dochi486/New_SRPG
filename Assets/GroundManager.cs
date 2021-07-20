@@ -1,14 +1,17 @@
-﻿using System;
+﻿using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
-using DG.Tweening;
 
 public class GroundManager : SingletonMonoBehavior<GroundManager>
 {
     public Dictionary<Vector2Int, BlockType> map = new Dictionary<Vector2Int, BlockType>(); //맵의 좌표로 정보 접근(맵을 지정)
     public BlockType passableValues = BlockType.Water | BlockType.Walkable; //갈 수 있는 지역(밟을 수 있는 타일)을 int로 받는 것
     public Vector2Int goalPos; //목표지점
+
+    public bool useDebugMode = true;
+    public GameObject debugTextPrefab;
 
     internal void OnTouch(Vector3 position)
     {
@@ -44,6 +47,21 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             var pos = item.transform.position;
             Vector2Int intPos = new Vector2Int((int)pos.x, (int)pos.z); // 블록들의 x,z 좌표 저장
             map[intPos] = item.blockType; //맵 정보 초기화(dictionary에 (블록의 위치, 블록의 타입) 저장)
+
+
+            if (useDebugMode)
+            {
+                StringBuilder debugText = new StringBuilder();/*= $"{intPos.x}:{intPos.y}"*/;
+                ContainingText(debugText, item, BlockType.Walkable);
+                ContainingText(debugText, item, BlockType.Water);
+                ContainingText(debugText, item, BlockType.Player);
+                ContainingText(debugText, item, BlockType.Monster);
+                //item.name = $"{item.name}: {posString}";
+                GameObject textMeshGo = Instantiate(debugTextPrefab, item.transform); // item은 blockinfo
+                textMeshGo.transform.localPosition = Vector3.zero;
+                TextMesh textMesh = textMeshGo.GetComponentInChildren<TextMesh>();
+                textMesh.text = debugText.ToString();
+            }
         }
         playerPos.x = (int)player.position.x; // 플레이어의 위치 저장
         playerPos.y = (int)player.position.z; //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
@@ -76,6 +94,15 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             // null을 주어 카메라가 따라가지 않도록 하자
         }
     }
+
+    private void ContainingText(StringBuilder sb, BlockInfo item, BlockType walkable)
+    {
+        if (item.blockType.HasFlag(walkable))
+        {
+            sb.AppendLine(walkable.ToString());
+        }
+    }
+
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 }

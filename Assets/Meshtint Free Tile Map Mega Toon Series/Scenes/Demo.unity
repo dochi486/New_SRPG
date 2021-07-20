@@ -6278,6 +6278,8 @@ MonoBehaviour:
   completeUiInite: 0
   passableValues: 14
   goalPos: {x: 0, y: 0}
+  useDebugMode: 1
+  debugTextPrefab: {fileID: 562230789588128102, guid: fb300b8cf1ee1bc48867e45b8b1ecbb6, type: 3}
   playerPos: {x: 0, y: 0}
   player: {fileID: 5318336549466714879}
   moveEase: 1
