@@ -30,12 +30,18 @@ public class BlockInfo : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        m_Renderer.material.color = m_MouseOverColor;
-        if(character)
+        ChangeColorToRed();
+        if (character)
         {
             CharacterStateUI.Instance.Show(character);
         }
     }
+
+    public void ChangeColorToRed()
+    {
+        m_Renderer.material.color = m_MouseOverColor;
+    }
+
     private void OnMouseExit()
     {
         m_Renderer.material.color = m_OriginalColor;
@@ -68,10 +74,37 @@ public class BlockInfo : MonoBehaviour
             //Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
             return;
         }
+        //if(character && character == Player.SelectedPlayer)
+        //{
+        //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
+        //    //character.moveDistance
+        //    ShowMoveableDistance(character.moveDistance);
+        //}
         //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
         //clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
         Player.SelectedPlayer.OnTouch(transform.position);
     }
+
+    public LayerMask layerMask;
+    private void ShowMoveableDistance(int moveDistance)
+    {
+        Vector2Int currentPos = transform.position.ToVector2Int();
+        Quaternion rotate = Quaternion.Euler(0, 45, 0);
+        var blocks = Physics.OverlapBox(transform.position, Vector3.one * moveDistance, rotate, gameObject.layer);
+
+        foreach (var item in blocks)
+        {
+            item.GetComponent<BlockInfo>().ChangeColorToRed();
+        }
+
+        //Vector2Int currenPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+        //List<List<Vector2Int>> lines = new List<List<Vector2Int>>(); //갈 수 있는 길을 이은 리스트를 또 한 번 더 리스트에 담아준다
+        //for (int i = 0; i < moveDistance; i++)
+        //{
+        //    List<Vector2Int> line = new List<Vector2Int>(); //이동할 수 있는 칸을 선으로 이은 것을 리스트에 담기 위한 것
+
+    }
+
 
     string debugTextPrefab = "DebugTextPrefab"; // 리소스에서 생성할 DebugTextPrefab의 이름 저장
     GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수

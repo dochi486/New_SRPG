@@ -1,6 +1,19 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+static public class GroundExtension //Mathf.RoundToInt 매번 쓰니까 확장함수로 작성
+{
+    static public Vector2Int ToVector2Int(this Vector3 v3)
+    {
+        return new Vector2Int(Mathf.RoundToInt(v3.x), Mathf.RoundToInt(v3.z));
+    }
+    static public Vector3 ToVector2Int(this Vector2Int v2Int, int y)
+    {
+        return new Vector3(v2Int.x, y, v2Int.y);
+    }
+}
+
+
 public class GroundManager : SingletonMonoBehavior<GroundManager>
 {
     public Transform player;
@@ -82,6 +95,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
         map[pos] &= ~removeBlockType;  // 기존 값에서 삭제하겠다.
         blockInfoMap[pos].blockType &= ~removeBlockType; //비트 연산자? 플래그를 제거하는 부분 &= ~
+        blockInfoMap[pos].character = null; //캐릭터를 null로 비워준다
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
     }

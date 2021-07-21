@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 23758132917705532}
   - component: {fileID: 65347789334611550}
   - component: {fileID: 488283980210975158}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bridge 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,3 +110,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockType: 1
   clickDistance: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
