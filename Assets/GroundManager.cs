@@ -55,7 +55,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
 
     //블록에 추가로 타입을 넣어주기 위한 함수 
-    internal void AddBlockInfo(Vector3 position, BlockType addBlockType)
+    internal void AddBlockInfo(Vector3 position, BlockType addBlockType, Character character)
     {
         // 실행한 곳의 position 정보를 담고 있는 pos를 생성
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
@@ -67,6 +67,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
 
         map[pos] |= addBlockType; //맵 정보를 담고 있는 딕셔너리에 AddBlockInfo를 실행한 블록의 블록타입을 넣는다
         blockInfoMap[pos].blockType |= addBlockType;
+        blockInfoMap[pos].character = character;
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
     }

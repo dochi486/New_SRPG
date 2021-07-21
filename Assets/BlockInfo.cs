@@ -18,6 +18,33 @@ public enum BlockType
 
 public class BlockInfo : MonoBehaviour
 {
+
+    Renderer m_Renderer;
+    private Color m_MouseOverColor = Color.red;
+    private Color m_OriginalColor;
+
+    private void Awake()
+    {
+        m_Renderer = GetComponentInChildren<Renderer>();
+        m_OriginalColor = m_Renderer.material.color;
+    }
+    private void OnMouseOver()
+    {
+        m_Renderer.material.color = m_MouseOverColor;
+        if(character)
+        {
+            CharacterStateUI.Instance.Show(character);
+        }
+    }
+    private void OnMouseExit()
+    {
+        m_Renderer.material.color = m_OriginalColor;
+        if(character)
+        {
+            CharacterStateUI.Instance.Close();
+        }
+    }
+
     public BlockType blockType;
     Vector3 downMousePosition;
     public float clickDistance = 1f;
@@ -48,6 +75,8 @@ public class BlockInfo : MonoBehaviour
 
     string debugTextPrefab = "DebugTextPrefab"; // 리소스에서 생성할 DebugTextPrefab의 이름 저장
     GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수
+    internal Character character;
+
     internal void UpdateDebugInfo()
     {
         // 생성된 DebugTextPrefab 오브젝트가 없다면
@@ -75,4 +104,6 @@ public class BlockInfo : MonoBehaviour
             sb.AppendLine(walkable.ToString()); // debugText에 값을 넣어준다.
         }
     }
+
+
 }

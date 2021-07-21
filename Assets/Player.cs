@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Character
 {
     static public Player SelectedPlayer;
     Animator animator;
@@ -13,9 +13,14 @@ public class Player : MonoBehaviour
     {
         SelectedPlayer = this;
         animator = GetComponentInChildren<Animator>();
-        GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player);
+        GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this);
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
     }
+    public void PlayAnimation(string nodName)
+    {
+        animator.Play(nodName, 0, 0);
+    }
+
     internal void OnTouch(Vector3 position)
     {
         Vector2Int findPos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
@@ -75,7 +80,7 @@ public class Player : MonoBehaviour
             // 이동이 끝나면 Idle애니메이션을 실행시키자
             FollowTarget.Instance.SetTarget(null);
             // null을 주어 카메라가 따라가지 않도록 하자
-            GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player);
+            GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player, this);
             // 이동한 위치에는 플레이어 정보 추가
         }
     }
@@ -84,8 +89,4 @@ public class Player : MonoBehaviour
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
-    public void PlayAnimation(string nodName)
-    {
-        animator.Play(nodName, 0, 0);
-    }
 }

@@ -17221,45 +17221,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907186836}
     m_Modifications:
-    - target: {fileID: 4923787333784110509, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 19
+    - target: {fileID: 4923787334114640565, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787333852203168, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+    - target: {fileID: 4923787334114640565, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.5
+      value: -139.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787333946270007, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 23
+    - target: {fileID: 4923787334114640570, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Name
+      value: HpBg
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787334215029011, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 4923787334487938131, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+    - target: {fileID: 4923787334696492865, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923787334696492865, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -181.4
+      value: -71.31547
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787334487938131, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -242.2
+    - target: {fileID: 4923787334696492870, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Name
+      value: MpBg
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787334710633294, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_FontData.m_MinSize
-      value: 1
+    - target: {fileID: 4923787334786171416, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787334710633294, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 19
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334918566823, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+    - target: {fileID: 4923787334786171416, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -113
+      value: -139.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4923787334918566823, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -162
+    - target: {fileID: 4923787334786171417, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Name
+      value: HpGauge
       objectReference: {fileID: 0}
     - target: {fileID: 4923787335122892957, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Pivot.x
@@ -17348,6 +17344,22 @@ PrefabInstance:
     - target: {fileID: 4923787335122893154, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Name
       value: CharacterStateUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -71.31552
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 6.600006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4923787335271592010, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Name
+      value: MpGauge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
@@ -21815,6 +21827,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
+      propertyPath: hp
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
+      propertyPath: mp
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
+      propertyPath: nickName
+      value: "\uB808\uC628"
+      objectReference: {fileID: 0}
     - target: {fileID: 7123099442938170883, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -21948,3 +21972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9291048680f2e1b46b8808c4b3ca7b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nickName: "\uBAAC\uC2A4\uD130"
+  hp: 185
+  mp: 25
+  status: 0
