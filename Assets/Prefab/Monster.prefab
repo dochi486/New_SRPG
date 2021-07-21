@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6524290680066631363}
+  - component: {fileID: 5362774528967013795}
   m_Layer: 0
   m_Name: Monster
   m_TagString: Untagged
@@ -31,6 +32,43 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5362774528967013795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1667095595925435523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9291048680f2e1b46b8808c4b3ca7b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nickName: "\uBAAC\uC2A4\uD130"
+  hp: 30
+  mp: 25
+  status: 0
+  maxMp: 50
+  maxHp: 50
+--- !u!95 &1300258300
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6918485924910687121}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: ab49f3cef633f1d4c84f8c46ec6c0b74, type: 3}
+  m_Controller: {fileID: 9100000, guid: 63437801f4083e3469a504aa2e0522bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6918485924910654769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -86,8 +124,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13700000, guid: 9213d9c7c87ed1448b0ca6a582ac8776, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 618fd1c52a4c9b1499cc720406d67eb6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9213d9c7c87ed1448b0ca6a582ac8776, type: 3}
+--- !u!1 &6918485924910687121 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 9213d9c7c87ed1448b0ca6a582ac8776, type: 3}
+  m_PrefabInstance: {fileID: 6918485924910654769}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6918485924910268337 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9213d9c7c87ed1448b0ca6a582ac8776, type: 3}

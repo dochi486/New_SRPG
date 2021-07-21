@@ -5,6 +5,7 @@ public class CharacterStateUI : SingletonMonoBehavior<CharacterStateUI>
 {
     Text status;
     Text nickName;
+
     RectTransform mpGauge;
     RectTransform mpBg;
     RectTransform hpGauge;
@@ -17,7 +18,7 @@ public class CharacterStateUI : SingletonMonoBehavior<CharacterStateUI>
         base.Show();
 
         status = transform.Find("Status").GetComponent<Text>();
-        nickName = transform.Find("NickName").GetComponent<Text>();
+        nickName = transform.Find("Name").GetComponent<Text>();
 
 
         mpGauge = transform.Find("MPBar/MpGauge").GetComponent<RectTransform>();

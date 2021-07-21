@@ -65,6 +65,7 @@ public class Player : Character
             Player.SelectedPlayer.PlayAnimation("Walk");
             // FollowTarget의 SetTarget을 실행시켜 선택된 캐릭터를 카메라가 따라가게 하자
             FollowTarget.Instance.SetTarget(Player.SelectedPlayer.transform);
+            path.RemoveAt(0); //처음에 자기가 위치한 블럭의 인덱스를 삭제해서 제자리에서 애니메이션하지 않도록
             foreach (var item in path) //길이 있다면 path에 저장된 위치를 하나씩 불러와 이동시키는 것
             {
                 Vector3 playerNewPos = new Vector3(item.x, 0, item.y);

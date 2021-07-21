@@ -14,8 +14,8 @@ public class Character : MonoBehaviour
     public float hp;
     public float mp;
     public StatusType status;
-    internal int maxMp;
-    internal int maxHp;
+    public int maxMp;
+    public int maxHp;
 }
 public class Monster : Character
 {

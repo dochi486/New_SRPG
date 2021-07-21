@@ -12529,30 +12529,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4562075604489022, guid: 1b8fbee291cdc1046a281cb2b3b51bf7, type: 3}
   m_PrefabInstance: {fileID: 1283999567}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1300258299 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6918485924910687121, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-  m_PrefabInstance: {fileID: 5362774528967013793}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1300258300
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300258299}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: ab49f3cef633f1d4c84f8c46ec6c0b74, type: 3}
-  m_Controller: {fileID: 9100000, guid: 63437801f4083e3469a504aa2e0522bf, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1309893762
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17221,42 +17197,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907186836}
     m_Modifications:
-    - target: {fileID: 4923787334114640565, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334114640565, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -139.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334114640570, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Name
-      value: HpBg
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334696492865, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334696492865, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -71.31547
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334696492870, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Name
-      value: MpBg
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334786171416, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334786171416, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -139.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787334786171417, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Name
-      value: HpGauge
-      objectReference: {fileID: 0}
     - target: {fileID: 4923787335122892957, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -17344,22 +17284,6 @@ PrefabInstance:
     - target: {fileID: 4923787335122893154, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Name
       value: CharacterStateUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -71.31552
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787335271592005, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 6.600006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787335271592010, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_Name
-      value: MpGauge
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
@@ -21828,16 +21752,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
-      propertyPath: hp
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
-      propertyPath: mp
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 1446912181, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
-      propertyPath: nickName
-      value: "\uB808\uC628"
+      propertyPath: moveTimePerUnit
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 7123099442938170883, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
       propertyPath: m_RootOrder
@@ -21949,30 +21865,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6918485924897091217, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 618fd1c52a4c9b1499cc720406d67eb6, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
---- !u!1 &5362774528967013794 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1667095595925435523, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-  m_PrefabInstance: {fileID: 5362774528967013793}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5362774528967013795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362774528967013794}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9291048680f2e1b46b8808c4b3ca7b3f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nickName: "\uBAAC\uC2A4\uD130"
-  hp: 185
-  mp: 25
-  status: 0

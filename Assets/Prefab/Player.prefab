@@ -44,6 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4331e83f1ab329747804e44e480fa543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nickName: "\uB808\uC628"
+  hp: 100
+  mp: 30
+  status: 0
+  maxMp: 50
+  maxHp: 100
+  passableValues: 3
+  moveEase: 1
+  moveTimePerUnit: 0.3
 --- !u!1001 &5318336548645958227
 PrefabInstance:
   m_ObjectHideFlags: 0
