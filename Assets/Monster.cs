@@ -8,9 +8,9 @@ public enum StatusType
     Die,
 }
 
-public class Character : MonoBehaviour
+public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기본적인 정보를 가지고 있는 클래스
 {
-    public string nickName;
+    public string nickName = "이름";
     public float hp =10;
     public float mp = 0;
     public StatusType status;
@@ -26,6 +26,7 @@ public class Monster : Character
     void Start()
     {
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Monster, this);
+        //몬스터가 서있는 블록에 몬스터 타입도 추가
     }
 
     private void Awake()

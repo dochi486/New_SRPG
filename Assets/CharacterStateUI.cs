@@ -15,8 +15,9 @@ public class CharacterStateUI : SingletonMonoBehavior<CharacterStateUI>
 
     internal void Show(Character character)
     {
-        base.Show();
+        base.Show(); //블록이 플레이어 정보를 받고 mouseover일 때 플레이어 정보 UI 표시
 
+        
         status = transform.Find("Status").GetComponent<Text>();
         nickName = transform.Find("Name").GetComponent<Text>();
 

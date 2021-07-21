@@ -25,12 +25,12 @@ public class BlockInfo : MonoBehaviour
 
     private void Awake()
     {
-        m_Renderer = GetComponentInChildren<Renderer>();
-        m_OriginalColor = m_Renderer.material.color;
+        m_Renderer = GetComponentInChildren<Renderer>(); //블록의 렌더러를 가져온다. 메테리얼은 바로 접근이 불가해서!
+        m_OriginalColor = m_Renderer.material.color; //메테리얼의 원래 색을 저장
     }
-    private void OnMouseOver()
+    private void OnMouseOver() //마우스가 블럭에 들어오면 실행
     {
-        ChangeColorToRed();
+        ChangeColorToRed(); //렌더러가 가지고 있는 메테리얼의 색이 바뀐다
         if (character)
         {
             CharacterStateUI.Instance.Show(character);
@@ -42,7 +42,7 @@ public class BlockInfo : MonoBehaviour
         m_Renderer.material.color = m_MouseOverColor;
     }
 
-    private void OnMouseExit()
+    private void OnMouseExit() //마우스가 블록을 빠져나가면 실행되는 부분
     {
         m_Renderer.material.color = m_OriginalColor;
         if(character)
@@ -74,7 +74,7 @@ public class BlockInfo : MonoBehaviour
             //Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
             return;
         }
-        //if(character && character == Player.SelectedPlayer)
+        //if(character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
         //{
         //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
         //    //character.moveDistance
@@ -89,9 +89,10 @@ public class BlockInfo : MonoBehaviour
     private void ShowMoveableDistance(int moveDistance)
     {
         Vector2Int currentPos = transform.position.ToVector2Int();
-        Quaternion rotate = Quaternion.Euler(0, 45, 0);
+        Quaternion rotate = Quaternion.Euler(0, 45, 0); //여긴 왜 회전시키는 거지?
+        
         var blocks = Physics.OverlapBox(transform.position, Vector3.one * moveDistance, rotate, gameObject.layer);
-
+        //블록 위치에서 플레이어가 이동 가능한 영역의 충돌체를 가져온다?
         foreach (var item in blocks)
         {
             item.GetComponent<BlockInfo>().ChangeColorToRed();

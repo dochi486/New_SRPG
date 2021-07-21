@@ -65,7 +65,7 @@ public class Player : Character
             //플레이어가 이동하면 원래 있던 위치의 블록타입에서 Player타입 제거
             Player.SelectedPlayer.PlayAnimation("Walk");
             // FollowTarget의 SetTarget을 실행시켜 선택된 캐릭터를 카메라가 따라가게 하자
-            FollowTarget.Instance.SetTarget(Player.SelectedPlayer.transform);
+            FollowTarget.Instance.SetTarget(Player.SelectedPlayer.transform); //FollowTarget의 SetTarget을 실행하여 선택한 캐릭터를 카메라가 따라간다
             path.RemoveAt(0); //처음에 자기가 위치한 블럭의 인덱스를 삭제해서 제자리에서 애니메이션하지 않도록
             foreach (var item in path) //길이 있다면 path에 저장된 위치를 하나씩 불러와 이동시키는 것
             {
