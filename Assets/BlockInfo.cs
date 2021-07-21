@@ -56,6 +56,7 @@ public class BlockInfo : MonoBehaviour
             GameObject textMeshGo = Instantiate((GameObject)Resources.Load(debugTextPrefab), transform); //생성
             debugTextGos = textMeshGo;
             textMeshGo.transform.localPosition = Vector3.zero;
+            //로컬 포지션이 0이어야 블록에 딱 붙어서 텍스트가 생성된다
         }
         // 블록의 정보를 저장하자
         StringBuilder debugText = new StringBuilder();

@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
         SelectedPlayer = this;
         animator = GetComponentInChildren<Animator>();
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player);
+        //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
     }
     internal void OnTouch(Vector3 position)
     {
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
         else
         {
             GroundManager.Instance.RemoveBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player);
+            //플레이어가 이동하면 원래 있던 위치의 블록타입에서 Player타입 제거
             Player.SelectedPlayer.PlayAnimation("Walk");
             // FollowTarget의 SetTarget을 실행시켜 선택된 캐릭터를 카메라가 따라가게 하자
             FollowTarget.Instance.SetTarget(Player.SelectedPlayer.transform);

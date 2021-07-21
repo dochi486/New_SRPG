@@ -49,11 +49,12 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
                 //TextMesh textMesh = textMeshGo.GetComponentInChildren<TextMesh>();
                 //textMesh.text = debugText.ToString();
             }
-            blockInfoMap[intPos] = item;
+            blockInfoMap[intPos] = item; //dictionary에 블록의 위치값, blockInfos(블록정보) 값을 넣는다.
         }
     }
 
 
+    //블록에 추가로 타입을 넣어주기 위한 함수 
     internal void AddBlockInfo(Vector3 position, BlockType addBlockType)
     {
         // 실행한 곳의 position 정보를 담고 있는 pos를 생성
@@ -64,7 +65,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             Debug.LogError($"{pos} 위치에 맵이 없다");
         }
 
-        map[pos] |= addBlockType;
+        map[pos] |= addBlockType; //맵 정보를 담고 있는 딕셔너리에 AddBlockInfo를 실행한 블록의 블록타입을 넣는다
         blockInfoMap[pos].blockType |= addBlockType;
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
@@ -78,8 +79,8 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             Debug.LogError($"{pos} 위치에 맵이 없다");
         }
 
-        map[pos] &= ~removeBlockType;               // 기존 값에서 삭제하겠다.
-        blockInfoMap[pos].blockType &= ~removeBlockType;
+        map[pos] &= ~removeBlockType;  // 기존 값에서 삭제하겠다.
+        blockInfoMap[pos].blockType &= ~removeBlockType; //비트 연산자? 플래그를 제거하는 부분 &= ~
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
     }
