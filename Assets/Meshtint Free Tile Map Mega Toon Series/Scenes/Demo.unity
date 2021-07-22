@@ -24576,6 +24576,10 @@ PrefabInstance:
       propertyPath: moveTimePerUnit
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 5318336548659657203, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c4cfdbe03f4e5de4ca19b5619571efb5, type: 2}
     - target: {fileID: 7123099442938170883, guid: 70eb301658ca3e54f80fcf5bd420ab33, type: 3}
       propertyPath: m_RootOrder
       value: 5
