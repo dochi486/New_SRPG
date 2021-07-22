@@ -11,6 +11,11 @@ static public class GroundExtension //Mathf.RoundToInt 매번 쓰니까 확장�
     {
         return new Vector3(v2Int.x, y, v2Int.y);
     }
+
+    static public Vector3 ToVector3Snap(this Vector3 v3)
+    {
+        return new Vector3(Mathf.Round(v3.x), v3.y, Mathf.Round(v3.z));
+    }
 }
 
 
@@ -19,7 +24,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
     public Transform player;
     // 지나갈 수 있는 타입을 미리 저장해 맵 정보에 사용할 수 있도록 하자. 전의 코드는 int형으로 저장을 했었다
     // Walkable 과 Water(둘중 하나라도? 아마 "|" 때문에)로 지정된 블록은 지나다닐 수 있는 블록이다.
-    public Dictionary<Vector2Int, BlockType> map = new Dictionary<Vector2Int, BlockType>(); //맵의 좌표로 정보 접근(맵을 지정)
+    //public Dictionary<Vector2Int, BlockType> map = new Dictionary<Vector2Int, BlockType>(); //맵의 좌표로 정보 접근(맵을 지정)
     // A*에서 사용
     public Dictionary<Vector2Int, BlockInfo> blockInfoMap = new Dictionary<Vector2Int, BlockInfo>();// 맵 정보 에서 사용
     
@@ -46,7 +51,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
             var pos = item.transform.position;
             //Vector2Int intPos = new Vector2Int((int)pos.x, (int)pos.z); // 블록들의 x,z 좌표 저장
             Vector2Int intPos = pos.ToVector2Int();
-            map[intPos] = item.blockType; //맵 정보 초기화(dictionary에 (블록의 위치, 블록의 타입) 저장)
+            //map[intPos] = item.blockType; //맵 정보 초기화(dictionary에 (블록의 위치, 블록의 타입) 저장)
 
             if (useDebugMode)
             {
@@ -74,12 +79,12 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         // 실행한 곳의 position 정보를 담고 있는 pos를 생성
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         // 만일 pos의 값이 map에 저장한 블록들의 위치와 일치하는게 없다면
-        if (map.ContainsKey(pos) == false)
+        if (blockInfoMap.ContainsKey(pos) == false)
         {
             Debug.LogError($"{pos} 위치에 맵이 없다");
         }
 
-        map[pos] |= addBlockType; //맵 정보를 담고 있는 딕셔너리에 AddBlockInfo를 실행한 블록의 블록타입을 넣는다
+        //map[pos] |= addBlockType; //맵 정보를 담고 있는 딕셔너리에 AddBlockInfo를 실행한 블록의 블록타입을 넣는다
         blockInfoMap[pos].blockType |= addBlockType;
         blockInfoMap[pos].character = character;
         if (useDebugMode)
@@ -89,12 +94,12 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
     internal void RemoveBlockInfo(Vector3 position, BlockType removeBlockType)
     {
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
-        if (map.ContainsKey(pos) == false)
+        if (blockInfoMap.ContainsKey(pos) == false)
         {
             Debug.LogError($"{pos} 위치에 맵이 없다");
         }
 
-        map[pos] &= ~removeBlockType;  // 기존 값에서 삭제하겠다.
+        //map[pos] &= ~removeBlockType;  // 기존 값에서 삭제하겠다.
         blockInfoMap[pos].blockType &= ~removeBlockType; //비트 연산자? 플래그를 제거하는 부분 &= ~
         blockInfoMap[pos].character = null; //캐릭터를 null로 비워준다
         if (useDebugMode)

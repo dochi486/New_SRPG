@@ -52,7 +52,7 @@ public class Player : Character
 
         playerPos.x = Mathf.RoundToInt(player.position.x); // 플레이어의 위치 저장
         playerPos.y = Mathf.RoundToInt(player.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
-        var map = GroundManager.Instance.map;
+        var map = GroundManager.Instance.blockInfoMap;
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
 
@@ -92,4 +92,13 @@ public class Player : Character
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
+    internal void ShowAttackArea()
+    {
+        throw new NotImplementedException();
+    }
+
+    internal bool OnMoveable(Vector3 position, int moveDistance)
+    {
+        throw new NotImplementedException();
+    }
 }

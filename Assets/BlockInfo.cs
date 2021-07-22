@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
@@ -38,6 +39,11 @@ public class BlockInfo : MonoBehaviour
     public void ChangeColorToRed()
     {
         m_Renderer.material.color = m_MouseOverColor;
+    }
+
+    public void ChangeToOriginalColor()
+    {
+        m_Renderer.material.color = m_OriginalColor;
     }
 
     private void OnMouseExit() //마우스가 블록을 빠져나가면 실행되는 부분
@@ -95,15 +101,21 @@ public class BlockInfo : MonoBehaviour
                 break;
         }
 
-        if (character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
-        {
-            //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
-            //    //character.moveDistance
-            ShowMoveableDistance(character.moveDistance);
-        }
-        //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
-        //clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
-        Player.SelectedPlayer.OnTouch(transform.position);
+        //이미 빨간 블럭 상태일 때 다시 선택하면 빨간 블럭의 색을 메테리얼의 원래 색으로 돌리기
+
+        //현재 있는 블럭에 몬스터가 있다면 공격하기
+
+
+        //여기는 왜 안 쓰는지 영상 보면서 확인
+        //if (character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
+        //{
+        //    //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
+        //    //    //character.moveDistance
+        //    ShowMoveableDistance(character.moveDistance);
+        //}
+        ////GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
+        ////clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
+        //Player.SelectedPlayer.OnTouch(transform.position);
     }
 
     private void AttackToTarget()
@@ -118,7 +130,14 @@ public class BlockInfo : MonoBehaviour
 
     private void SelectMoveBlockOrAttackTarget()
     {
-        throw new NotImplementedException();
+        if (character) //공격 대상이 있다면 공격한다. 
+        {
+
+        }
+        else
+        {
+
+        }
     }
 
     /// <summary>
@@ -129,7 +148,7 @@ public class BlockInfo : MonoBehaviour
     {
         if (character == null)
             return;
-        if(character.GetType() == typeof(Player)) //character의 타입이 플레이어가 맞는지 확인
+        if (character.GetType() == typeof(Player)) //character의 타입이 플레이어가 맞는지 확인
         {
             Player.SelectedPlayer = character as Player; //맞다면 선택된 플레이어로 지정한다 형변환하는 새로운 방법!
             //Player.SelectedPlayer = (Player)character;
@@ -138,7 +157,7 @@ public class BlockInfo : MonoBehaviour
             ShowMoveableDistance(Player.SelectedPlayer.moveDistance);
 
             //현재 위치에서 공격이 가능한 영역을 표시한다
-            //Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
+            Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
             StageManager.GameState = GameStateType.SelectMoveBlockOrAttackTarget;
         }
     }
@@ -146,16 +165,24 @@ public class BlockInfo : MonoBehaviour
     public LayerMask layerMask;
     private void ShowMoveableDistance(int moveDistance)
     {
-        Vector2Int currentPos = transform.position.ToVector2Int();
+        //Vector2Int currentPos = transform.position.ToVector2Int();
         Quaternion rotate = Quaternion.Euler(0, 45, 0); //여긴 왜 회전시키는 거지?
+        Vector3 halfExtents = (moveDistance / Mathf.Sqrt(2)) * 0.99f * Vector3.one;
 
-        var blocks = Physics.OverlapBox(transform.position, Vector3.one * moveDistance, rotate, gameObject.layer);
+        var blocks = Physics.OverlapBox(transform.position, halfExtents, rotate);
         //블록 위치에서 플레이어가 이동 가능한 영역의 충돌체를 가져온다?
         foreach (var item in blocks)
         {
-            item.GetComponent<BlockInfo>().ChangeColorToRed();
+            if (Player.SelectedPlayer.OnMoveable(item.transform.position, moveDistance))
+            {
+                var block = item.GetComponent<BlockInfo>();
+                if (block)
+                {
+                    block.ChangeColorToRed();
+                    highLightedMoveableArea.Add(block);
+                }
+            }
         }
-
         //Vector2Int currenPos = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
         //List<List<Vector2Int>> lines = new List<List<Vector2Int>>(); //갈 수 있는 길을 이은 리스트를 또 한 번 더 리스트에 담아준다
         //for (int i = 0; i < moveDistance; i++)
@@ -164,6 +191,13 @@ public class BlockInfo : MonoBehaviour
 
     }
 
+    static List<BlockInfo> highLightedMoveableArea = new List<BlockInfo>();
+
+    private void ClearMoveableArea()
+    {
+        highLightedMoveableArea.ForEach(x => x.ChangeToOriginalColor());
+        highLightedMoveableArea.Clear();
+    }
 
     string debugTextPrefab = "DebugTextPrefab"; // 리소스에서 생성할 DebugTextPrefab의 이름 저장
     GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수
