@@ -72,6 +72,29 @@ public class BlockInfo : MonoBehaviour
             //Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
             return;
         }
+
+        switch (StageManager.GameState)
+        {
+
+            case GameStateType.SelectPlayer:
+                SelectPlayer();
+                break;
+            case GameStateType.SelectMoveBlockOrAttackTarget:
+                SelectMoveBlockOrAttackTarget();
+                break;
+            case GameStateType.SelectAttackTarget:
+                SelectAttackTarget();
+                break;
+            case GameStateType.AttackToTarget:
+                AttackToTarget();
+                break;
+            case GameStateType.NotInit:
+            case GameStateType.PlayerMoving:
+            case GameStateType.MonsterTurn:
+                Debug.Log($"블럭을 클릭할 수 없는 상태입니다:" + $" {StageManager.GameState}");
+                break;
+        }
+
         if (character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
         {
             //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
@@ -81,6 +104,43 @@ public class BlockInfo : MonoBehaviour
         //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
         //clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
         Player.SelectedPlayer.OnTouch(transform.position);
+    }
+
+    private void AttackToTarget()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SelectAttackTarget()
+    {
+        throw new NotImplementedException();
+    }
+
+    private void SelectMoveBlockOrAttackTarget()
+    {
+        throw new NotImplementedException();
+    }
+
+    /// <summary>
+    /// 지정한 캐릭터가 몬스터가 아니라 플레이어라면 
+    /// 
+    /// </summary>
+    private void SelectPlayer()
+    {
+        if (character == null)
+            return;
+        if(character.GetType() == typeof(Player)) //character의 타입이 플레이어가 맞는지 확인
+        {
+            Player.SelectedPlayer = character as Player; //맞다면 선택된 플레이어로 지정한다 형변환하는 새로운 방법!
+            //Player.SelectedPlayer = (Player)character;
+
+            //이동 가능한 영역을 표시한다
+            ShowMoveableDistance(Player.SelectedPlayer.moveDistance);
+
+            //현재 위치에서 공격이 가능한 영역을 표시한다
+            //Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
+            StageManager.GameState = GameStateType.SelectMoveBlockOrAttackTarget;
+        }
     }
 
     public LayerMask layerMask;
