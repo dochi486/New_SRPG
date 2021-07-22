@@ -16,6 +16,7 @@ public class Player : Character
         animator = GetComponentInChildren<Animator>();
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this);
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
+        FollowTarget.Instance.SetTarget(transform);
     }
     public void PlayAnimation(string nodName)
     {
