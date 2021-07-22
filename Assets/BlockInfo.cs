@@ -157,7 +157,7 @@ public class BlockInfo : MonoBehaviour
             ShowMoveableDistance(Player.SelectedPlayer.moveDistance);
 
             //현재 위치에서 공격이 가능한 영역을 표시한다
-            Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
+            //Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
             StageManager.GameState = GameStateType.SelectMoveBlockOrAttackTarget;
         }
     }

@@ -19,7 +19,14 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
   
 
     public int moveDistance = 5; //움직일 수 있는 영역 표시하기 위한 변수
-    
+
+    private void Awake()
+    {
+        //var attackPoints = GetComponentsInChildren<AttackPoint>(true);
+
+
+    }
+
 }
 public class Monster : Character
 {

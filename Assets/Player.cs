@@ -55,8 +55,7 @@ public class Player : Character
         var map = GroundManager.Instance.blockInfoMap;
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
-
-        List<Vector2Int> path = PathFinding2D.find4(playerPos, goalPos, map, passableValues);
+        List<Vector2Int> path = PathFinding2D.find4(playerPos, goalPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
 
         if (path.Count == 0)
             Debug.Log("길이 없다.");
@@ -92,13 +91,51 @@ public class Player : Character
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
-    internal void ShowAttackArea()
+    //internal bool ShowAttackArea()
+    //{
+    //    bool existEnemy = false; //적이 존재하는지 확인
+    //    Vector2Int currentPos = transform.position.ToVector2Int();
+    //    var map = GroundManager.Instance.blockInfoMap;
+
+    //    foreach (var item in atttackablePoints)
+    //    {
+    //        Vector2Int pos = item + currentPos;
+
+    //        if(map.ContainsKey(pos))
+    //        {
+    //            if(IsEnemyExist(map[pos]))
+    //            {
+    //                map[pos].ChangeColorToRed();
+    //                existEnemy = true;
+    //            }
+    //        }
+    //    }
+    //    return existEnemy;
+    //}
+
+    private bool IsEnemyExist(BlockInfo blockInfo)
     {
-        throw new NotImplementedException();
+        if (blockInfo.blockType.HasFlag(BlockType.Monster) == false)
+            return false;
+
+        Debug.Assert(blockInfo.character != null, "캐릭터는 꼭 있어야합니다");
+
+        return true;
     }
 
-    internal bool OnMoveable(Vector3 position, int moveDistance)
+    internal bool OnMoveable(Vector3 position, int maxDistance)
     {
-        throw new NotImplementedException();
+        Vector2Int goalPos = position.ToVector2Int();
+        Vector2Int playerPos = transform.position.ToVector2Int();
+        var map = GroundManager.Instance.blockInfoMap;
+        var path = PathFinding2D.find4(playerPos, goalPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
+        if (path.Count == 0)
+            Debug.Log("길이 없다!");
+        else if (path.Count > maxDistance + 1)
+            Debug.Log("이동할 수 없다!");
+        else
+            return true;
+
+        return false;
     }
 }
