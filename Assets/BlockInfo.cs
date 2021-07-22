@@ -74,12 +74,12 @@ public class BlockInfo : MonoBehaviour
             //Debug.Log($"downMousePosition : {downMousePosition}" + $"upMousePosition : {upMousePosition}");
             return;
         }
-        //if(character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
-        //{
-        //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
-        //    //character.moveDistance
-        //    ShowMoveableDistance(character.moveDistance);
-        //}
+        if (character && character == Player.SelectedPlayer) //선택한 블록에 character정보가 있고 플레이어가 선택한 플레이어라면
+        {
+            //    //선택된 플레이어가 캐릭터 스크립트를 상속 받았을 때 이동 가능한 영역을 표시
+            //    //character.moveDistance
+            ShowMoveableDistance(character.moveDistance);
+        }
         //GroundManager를 싱글턴으로 만들어서 마우스 다운되면.. 이동하게!
         //clickDistance보다 작으면 GroundManager의 OnTouch함수를 실행하자
         Player.SelectedPlayer.OnTouch(transform.position);

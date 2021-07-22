@@ -7,7 +7,7 @@ static public class GroundExtension //Mathf.RoundToInt 매번 쓰니까 확장�
     {
         return new Vector2Int(Mathf.RoundToInt(v3.x), Mathf.RoundToInt(v3.z));
     }
-    static public Vector3 ToVector2Int(this Vector2Int v2Int, int y)
+    static public Vector3 ToVector3(this Vector2Int v2Int, float y)
     {
         return new Vector3(v2Int.x, y, v2Int.y);
     }
