@@ -79,10 +79,10 @@ public class BlockInfo : MonoBehaviour
             return;
         }
 
-        switch (StageManager.GameState)
+        switch (StageManager.GameState) //GameState의 초기 값은 SelectPlayer
         {
 
-            case GameStateType.SelectPlayer:
+            case GameStateType.SelectPlayer: 
                 SelectPlayer();
                 break;
             case GameStateType.SelectMoveBlockOrAttackTarget:
@@ -132,11 +132,19 @@ public class BlockInfo : MonoBehaviour
     {
         if (character) //공격 대상이 있다면 공격한다. 
         {
-
+            if(Player.SelectedPlayer.CanAttackTarget(character))
+            {
+                Player.SelectedPlayer.AttackTarget(character);
+            }
         }
         else
         {
-
+            if(highLightedMoveableArea.Contains(this)) //이동 가능한 영역에 포함되어 있는 블록이면 이동하는 부분
+            {
+                Player.SelectedPlayer.MoveToPosition(transform.position); //플레이어를 이동시킨다
+                ClearMoveableArea(); //이동가능한 영역 표시했던 걸 지운다
+                StageManager.GameState = GameStateType.PlayerMoving; //플레이어의 상태를 움직이는 중으로 변경
+            }
         }
     }
 
@@ -157,7 +165,7 @@ public class BlockInfo : MonoBehaviour
             ShowMoveableDistance(Player.SelectedPlayer.moveDistance);
 
             //현재 위치에서 공격이 가능한 영역을 표시한다
-            //Player.SelectedPlayer.ShowAttackArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
+            Player.SelectedPlayer.ShowAttackableArea(); //플레이어가 공격 가능한 영역을 보여주는 함수를 만들자
             StageManager.GameState = GameStateType.SelectMoveBlockOrAttackTarget;
         }
     }

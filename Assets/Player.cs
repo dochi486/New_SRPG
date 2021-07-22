@@ -91,27 +91,42 @@ public class Player : Character
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
-    //internal bool ShowAttackArea()
-    //{
-    //    bool existEnemy = false; //적이 존재하는지 확인
-    //    Vector2Int currentPos = transform.position.ToVector2Int();
-    //    var map = GroundManager.Instance.blockInfoMap;
+    internal bool CanAttackTarget(Character character)
+    {
+        throw new NotImplementedException();
+    }
 
-    //    foreach (var item in atttackablePoints)
-    //    {
-    //        Vector2Int pos = item + currentPos;
+    internal void AttackTarget(Character character)
+    {
+        throw new NotImplementedException();
+    }
 
-    //        if(map.ContainsKey(pos))
-    //        {
-    //            if(IsEnemyExist(map[pos]))
-    //            {
-    //                map[pos].ChangeColorToRed();
-    //                existEnemy = true;
-    //            }
-    //        }
-    //    }
-    //    return existEnemy;
-    //}
+    internal void MoveToPosition(Vector3 position)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal bool ShowAttackableArea()
+    {
+        bool existEnemy = false; //적이 존재하는지 확인
+        Vector2Int currentPos = transform.position.ToVector2Int();
+        var map = GroundManager.Instance.blockInfoMap;
+
+        foreach (var item in atttackablePoints)
+        {
+            Vector2Int pos = item + currentPos;
+
+            if (map.ContainsKey(pos))
+            {
+                if (IsEnemyExist(map[pos]))
+                {
+                    map[pos].ChangeColorToRed();
+                    existEnemy = true;
+                }
+            }
+        }
+        return existEnemy;
+    }
 
     private bool IsEnemyExist(BlockInfo blockInfo)
     {
@@ -122,6 +137,7 @@ public class Player : Character
 
         return true;
     }
+
 
     internal bool OnMoveable(Vector3 position, int maxDistance)
     {

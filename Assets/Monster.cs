@@ -8,6 +8,13 @@ public enum StatusType
     Die,
 }
 
+public enum CharacterTypeEnum
+{
+    NotInit,
+    Player,
+    Monster,
+}
+
 public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기본적인 정보를 가지고 있는 클래스
 {
     public string nickName = "이름";
