@@ -1,16 +1,35 @@
-﻿//using MyColor.SceneTopUI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SingletonBase : MonoBehaviour
+public class HistoryUI : MonoBehaviour
 {
     static protected List<SingletonBase> MenuHistory = new List<SingletonBase>();
 
+    public static void ShowPreviousMenu(SingletonBase exceptUI = null)
+    {
+        if (exceptUI != null) // exceptUI는 제외 menuHistory에서 제거하자.
+            MenuHistory.RemoveAll(x => x == exceptUI);
+
+        int lastIndex = MenuHistory.Count - 1;
+        if (lastIndex == -1)
+        {
+            Debug.Log("보여줄 메뉴가 없다");
+            return;
+        }
+
+        var previousMenu = MenuHistory[lastIndex];
+        MenuHistory.RemoveAt(lastIndex);
+        previousMenu.Show();
+    }
+}
+
+public class SingletonBase : HistoryUI
+{
     public virtual int SortOrder => 0;
 
-    public virtual string HierarchyPath 
+    public virtual string HierarchyPath
     {
         get
         {
@@ -20,11 +39,14 @@ public class SingletonBase : MonoBehaviour
                 canvasName += SortOrder;
             }
 
-            return $"{canvasName}/" +GetType().ShortName();
-        } 
+            return $"{canvasName}/" + GetType().ShortName();
+        }
     }
 
-    virtual public void Show() { }
+    // HistoryUI에서 ShowPreviousMenu 함수 호출시 사용
+    // virtual인 이유 : SingletonMonoBehavior에 있는 Show 함수를 호출 하기 위함.
+    virtual public void Show() { Debug.Log("잘못된 호출, 자식에서 Override해주세요"); } // 아래처럼 살짝 줄여서 쓸 수도 있음
+    //virtual public void Show() => Debug.Log("잘못된 호출, 자식에서 Override해주세요"); // 함수 본문은 중괄호 열고 줄바꾸는게 기본이기 때문에 어색하다. 이럴때 람다식으로 표현하면 자연스럽다.
 
     [HideInInspector]
     public bool completeUiInite = false;
@@ -43,18 +65,17 @@ where T : SingletonBase
 {
     protected bool AllowBackAction => true;
 
-
+    /// <summary>
+    /// ShowPreviousMenu실행시 호출되는 함수
+    /// </summary>
     public override void Show()
     {
         base.Show();
-
     }
 
     protected void OnEnable()
     {
         UIStackManager.PushUiStack(transform, CloseCallback);
-
-        AddHistory();
     }
 
 
@@ -70,26 +91,11 @@ where T : SingletonBase
         base.OnDisable();
 
         UIStackManager.PopUiStack(CacheGameObject.GetInstanceID());
+
+        AddHistory();
     }
 
     private readonly int MaxHistoryCount = 5;
-
-    protected void ShowPreviousMenu(BaseUI<T> exceptUI = null)
-    {
-        if (exceptUI != null) // exceptUI는 제외 menuHistory에서 제거하자.
-            MenuHistory.RemoveAll(x => x == exceptUI);
-
-        int lastIndex = MenuHistory.Count - 1;
-        if (lastIndex == -1)
-        {
-            Debug.Log("보여줄 메뉴가 없다");
-            return;
-        }
-
-        var previousMenu = MenuHistory[lastIndex];
-        MenuHistory.RemoveAt(lastIndex);
-        previousMenu.Show();
-    }
 }
 
 /// <summary>
@@ -106,21 +112,21 @@ where T : SingletonBase
 public class SingletonMonoBehavior<T> : SingletonBase
 where T : SingletonBase
 {
-    static bool applicationQuit = false;
-    private void OnApplicationQuit() => applicationQuit = true;
-    
+    protected static bool ApplicationQuit = false;
+    private void OnApplicationQuit() => ApplicationQuit = true;
+
     static protected T m_instance;
     static public T Instance
     {
         get
         {
-            
+
             if (m_instance == null)
             {
-                if (applicationQuit)
+                if (ApplicationQuit)
                     return null;
                 SetInstance(Util.InstantiateSingleton<T>());
-                
+
                 //m_instance.gameObject.SetActive(false); // 여기서 꺼버리면 Start에서 코루틴호출하는게 꺼진다 -> 강제로 끄면 안된다
             }
 
@@ -168,7 +174,7 @@ where T : SingletonBase
         DontDestroyOnLoad(m_instance.gameObject.transform.root);
 
         //어웨이크에서 실행된 경우 여기서 ExecuteOneTimeInit 할 필요 없다.
-        if(m_instance.completeUiInite == false)
+        if (m_instance.completeUiInite == false)
             m_instance.ExecuteOneTimeInit();
 
 
@@ -235,7 +241,7 @@ where T : SingletonBase
             for (int i = 1; i < paths.Length; i++)
             {
                 var item = paths[i];
-                Transform existTr = currentTr.Find(item)?? new GameObject(item).transform;
+                Transform existTr = currentTr.Find(item) ?? new GameObject(item).transform;
                 existTr.SetParent(currentTr);
                 currentTr = existTr;
             }
@@ -333,12 +339,12 @@ where T : SingletonBase
         }
     }
 
-    public override void Show()
-    {
-        Show();
-    }
+    //public override void Show()
+    //{
+    //    Show();
+    //}
 
-    public void Show(bool force = true)
+    protected void Show(bool force = true)
     {
         CacheGameObject.SetActive(true);
 
