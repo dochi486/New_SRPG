@@ -1,8 +1,10 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
-public class NotifyUI : SingletonMonoBehavior<NotifyUI>
+public class CenterNotifyUI : SingletonMonoBehavior<CenterNotifyUI>
 {
     Text contentText;
     CanvasGroup canvasGroup;
@@ -14,18 +16,13 @@ public class NotifyUI : SingletonMonoBehavior<NotifyUI>
 
     }
 
-
     internal void Show(string text, float visibleTime = 3)
     {
         base.Show();
-
-        canvasGroup.DOKill();
-
         canvasGroup.alpha = 1;
 
         contentText.text = text;
 
         canvasGroup.DOFade(0, 1).SetDelay(visibleTime).OnComplete(Close);
     }
-
 }

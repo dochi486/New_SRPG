@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public enum GameStateType
@@ -20,17 +18,25 @@ public class StageManager : SingletonMonoBehavior<StageManager>
     static public GameStateType GameState
     {
         get => Instance.gameState;
-        set {
+        set
+        {
             Debug.Log($"{Instance.gameState} => {value}");
 
             NotifyUI.Instance.Show(value.ToString(), 10);
-            Instance.gameState = value; 
+            Instance.gameState = value;
         }
     }
     // Start is called before the first frame update
     void Start()
     {
         GameState = GameStateType.SelectPlayer;
+        CenterNotifyUI.Instance.Show("게임이 시작되었습니다.", 1.5f);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+            ContextMenuUI.Instance.Show(Input.mousePosition);
     }
 
 }
