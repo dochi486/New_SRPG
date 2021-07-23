@@ -21771,14 +21771,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
-      propertyPath: iconName
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
-      propertyPath: nickName
-      value: "\uC6A9\uC0AC"
-      objectReference: {fileID: 0}
     - target: {fileID: 7541386439388233957, guid: 098c57aa950e999469442df41bb0021b, type: 3}
       propertyPath: m_RootOrder
       value: 1

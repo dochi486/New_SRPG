@@ -19,7 +19,7 @@ public class BlockInfo : MonoBehaviour
 {
 
     Renderer m_Renderer;
-    private Color m_MouseOverColor = Color.red;
+    private Color moveableColor = Color.blue;
     private Color m_OriginalColor;
 
     private void Awake()
@@ -36,9 +36,13 @@ public class BlockInfo : MonoBehaviour
         }
     }
 
-    public void ChangeColorToRed()
+    public void ChangeColorToBlue()
     {
-        m_Renderer.material.color = m_MouseOverColor;
+        m_Renderer.material.color = moveableColor;
+    }
+    internal void ChangeColor(Color color)
+    {
+        m_Renderer.material.color = color;
     }
 
     public void ChangeToOriginalColor()
@@ -170,6 +174,7 @@ public class BlockInfo : MonoBehaviour
         }
     }
 
+
     public LayerMask layerMask;
     private void ShowMoveableDistance(int moveDistance)
     {
@@ -186,7 +191,7 @@ public class BlockInfo : MonoBehaviour
                 var block = item.GetComponent<BlockInfo>();
                 if (block)
                 {
-                    block.ChangeColorToRed();
+                    block.ChangeColorToBlue();
                     highLightedMoveableArea.Add(block);
                 }
             }

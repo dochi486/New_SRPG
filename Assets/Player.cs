@@ -25,9 +25,9 @@ public class Player : Character
         animator.Play(nodName, 0, 0);
     }
 
-    internal void OnTouch(Vector3 position)
+    internal void MoveToPosition(Vector3 position)
     {
-        Vector2Int findPos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
+        Vector2Int findPos = position.ToVector2Int();
         FindPath(findPos);
     }
 
@@ -86,6 +86,12 @@ public class Player : Character
             // null을 주어 카메라가 따라가지 않도록 하자
             GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player, this);
             // 이동한 위치에는 플레이어 정보 추가
+
+            bool existAttackTarget = ShowAttackableArea();
+            if (existAttackTarget)
+                StageManager.GameState = GameStateType.SelectAttackTarget;
+            else
+                StageManager.GameState = GameStateType.SelectPlayer;
         }
     }
 
@@ -106,10 +112,6 @@ public class Player : Character
         throw new NotImplementedException();
     }
 
-    internal void MoveToPosition(Vector3 position)
-    {
-        throw new NotImplementedException();
-    }
 
     internal bool ShowAttackableArea()
     {
@@ -117,19 +119,19 @@ public class Player : Character
         Vector2Int currentPos = transform.position.ToVector2Int();
         var map = GroundManager.Instance.blockInfoMap;
 
-        //foreach (var item in collection)
-        //{
-        //    Vector2Int pos = item + currentPos;
+        foreach (var item in attackablePoints) //공격 가능한 위치에 적이 있는지 확인???? 
+        {
+            Vector2Int pos = item + currentPos; //item(공격가능한 지점)의 월드 위치와 플레이어의 위치!
 
-        //    if (map.ContainsKey(pos))
-        //    {
-        //        if (IsEnemyExist(map[pos]))
-        //        {
-        //            map[pos].ChangeColorToRed();
-        //            existEnemy = true;
-        //        }
-        //    }
-        
+            if (map.ContainsKey(pos)) //position 키가 있을 때만 조건으로 들어가도록 (비어있지 않은 땅에 대해서만 검사)
+            {
+                if (IsEnemyExist(map[pos]))
+                {
+                    map[pos].ChangeColor(Color.red);
+                    existEnemy = true;
+                }
+            }
+        }
         return existEnemy;
     }
 
