@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7123099442938170883}
   - component: {fileID: 1446912181}
+  - component: {fileID: 11641098}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,11 +49,24 @@ MonoBehaviour:
   hp: 100
   mp: 30
   status: 0
-  maxMp: 50
   maxHp: 100
+  maxMp: 50
+  moveDistance: 5
   passableValues: 3
   moveEase: 1
   moveTimePerUnit: 0.3
+--- !u!114 &11641098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7408745405075567331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 972afd69e9c46234e8a1ec0ebeef627b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5318336548645958227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,7 +129,7 @@ PrefabInstance:
     - target: {fileID: 13700000, guid: 9759788f6132dd84da11e946ab72d663, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 3e43493a3a6181a4f8a2193c058db627, type: 2}
+      objectReference: {fileID: 2100000, guid: c4cfdbe03f4e5de4ca19b5619571efb5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9759788f6132dd84da11e946ab72d663, type: 3}
 --- !u!4 &5318336548645824643 stripped

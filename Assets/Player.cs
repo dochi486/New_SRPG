@@ -112,19 +112,19 @@ public class Player : Character
         Vector2Int currentPos = transform.position.ToVector2Int();
         var map = GroundManager.Instance.blockInfoMap;
 
-        foreach (var item in atttackablePoints)
-        {
-            Vector2Int pos = item + currentPos;
+        //foreach (var item in collection)
+        //{
+        //    Vector2Int pos = item + currentPos;
 
-            if (map.ContainsKey(pos))
-            {
-                if (IsEnemyExist(map[pos]))
-                {
-                    map[pos].ChangeColorToRed();
-                    existEnemy = true;
-                }
-            }
-        }
+        //    if (map.ContainsKey(pos))
+        //    {
+        //        if (IsEnemyExist(map[pos]))
+        //        {
+        //            map[pos].ChangeColorToRed();
+        //            existEnemy = true;
+        //        }
+        //    }
+        
         return existEnemy;
     }
 
