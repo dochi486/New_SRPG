@@ -129,7 +129,13 @@ public class BlockInfo : MonoBehaviour
 
     private void SelectAttackTarget()
     {
-        throw new NotImplementedException();
+        if(Player.SelectedPlayer.enemyExistPoint.Contains(this))
+        {
+            if(Player.SelectedPlayer.CanAttackTarget(character))
+            {
+                Player.SelectedPlayer.AttackTarget(character);
+            }
+        }
     }
 
     private void SelectMoveBlockOrAttackTarget()

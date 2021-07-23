@@ -45,11 +45,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: "\uBAAC\uC2A4\uD130"
+  iconName: Monster
+  power: 10
   hp: 30
   mp: 25
-  status: 0
-  maxMp: 50
+  status: 1
   maxHp: 50
+  maxMp: 50
+  attackablePoints: []
+  moveDistance: 5
 --- !u!95 &1300258300
 Animator:
   serializedVersion: 3

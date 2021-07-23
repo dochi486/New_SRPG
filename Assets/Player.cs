@@ -14,7 +14,7 @@ public class Player : Character
     // Start is called before the first frame update
     void Start()
     {
-        SelectedPlayer = this;
+        //SelectedPlayer = this; //왜 주석처리했을까?
         animator = GetComponentInChildren<Animator>();
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this);
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
@@ -95,6 +95,13 @@ public class Player : Character
         }
     }
 
+    public List<BlockInfo> enemyExistPoint = new List<BlockInfo>();
+
+    public void ClearEnemyExistPoint()
+    {
+        enemyExistPoint.ForEach(x => x.ChangeToOriginalColor());
+        enemyExistPoint.Clear();
+    }
 
     public Ease moveEase = Ease.Linear;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
@@ -115,7 +122,7 @@ public class Player : Character
     public float attackTime = 1;
     private IEnumerator AttackTargetCo(Character attackTarget)
     {
-        transform.LookAt(attackTarget.transform);
+        transform.LookAt(attackTarget.transform); 
 
         animator.Play("Attack");
         attackTarget.TakeHit(power);
@@ -126,7 +133,7 @@ public class Player : Character
 
     internal bool ShowAttackableArea()
     {
-        bool existEnemy = false; //적이 존재하는지 확인
+        //bool existEnemy = false; //적이 존재하는지 확인
         Vector2Int currentPos = transform.position.ToVector2Int();
         var map = GroundManager.Instance.blockInfoMap;
 
@@ -138,12 +145,13 @@ public class Player : Character
             {
                 if (IsEnemyExist(map[pos]))
                 {
-                    map[pos].ChangeColor(Color.red);
-                    existEnemy = true;
+                    enemyExistPoint.Add(map[pos]);
                 }
             }
         }
-        return existEnemy;
+        enemyExistPoint.ForEach(x => x.ChangeColor(Color.red));
+
+        return enemyExistPoint.Count > 0;
     }
 
     private bool IsEnemyExist(BlockInfo blockInfo)
