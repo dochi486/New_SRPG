@@ -20,7 +20,12 @@ public class StageManager : SingletonMonoBehavior<StageManager>
     static public GameStateType GameState
     {
         get => Instance.gameState;
-        set => Instance.gameState = value;
+        set {
+            Debug.Log($"{Instance.gameState} => {value}");
+
+            NotifyUI.Instance.Show(value.ToString(), 10);
+            Instance.gameState = value; 
+        }
     }
     // Start is called before the first frame update
     void Start()
