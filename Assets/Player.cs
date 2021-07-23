@@ -109,9 +109,20 @@ public class Player : Character
 
     internal void AttackTarget(Character character)
     {
-        throw new NotImplementedException();
+        StartCoroutine(AttackTargetCo(character));
     }
 
+    public float attackTime = 1;
+    private IEnumerator AttackTargetCo(Character attackTarget)
+    {
+        transform.LookAt(attackTarget.transform);
+
+        animator.Play("Attack");
+        attackTarget.TakeHit(power);
+        yield return new WaitForSeconds(attackTime);
+        StageManager.GameState = GameStateType.SelectPlayer;
+
+    }
 
     internal bool ShowAttackableArea()
     {
