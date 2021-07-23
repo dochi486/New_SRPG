@@ -24678,26 +24678,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1456725973, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 1.71
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456725974, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_fontSize
-      value: 5.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456725974, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_fontColor.a
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456725974, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 5.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 1456725974, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 3825205247
-      objectReference: {fileID: 0}
     - target: {fileID: 1667095595925435523, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_Name
       value: Monster
@@ -24708,7 +24688,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24716,7 +24696,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.81
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_LocalRotation.w
