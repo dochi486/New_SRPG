@@ -10,7 +10,8 @@ public class SnapMover : MonoBehaviour
     {
         if(Application.isPlaying)
         {
-            Destroy(this);
+            Destroy(this); //플레이 중일 때는 이 컴포넌트 snap mover만 파괴하겠다는 의미
+            //Destroy(gameObject)가 아니라 Destroy(this);를 해주는 이유 
         }
     }
 

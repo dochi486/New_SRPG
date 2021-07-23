@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public override CharacterTypeEnum CharacterType { get => CharacterTypeEnum.Player; }
+
     static public Player SelectedPlayer;
     Animator animator;
 
@@ -93,7 +95,10 @@ public class Player : Character
 
     internal bool CanAttackTarget(Character character)
     {
-        throw new NotImplementedException();
+        if (character.CharacterType != CharacterTypeEnum.Monster)
+            return false;
+
+        return true;
     }
 
     internal void AttackTarget(Character character)

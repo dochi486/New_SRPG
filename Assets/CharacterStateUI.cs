@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class CharacterStateUI : SingletonMonoBehavior<CharacterStateUI>
 {
     Text status;
-    Text nickName;
+    Text nickName; 
+    Image icon;
 
     RectTransform mpGauge;
     RectTransform mpBg;
@@ -20,6 +21,9 @@ public class CharacterStateUI : SingletonMonoBehavior<CharacterStateUI>
         
         status = transform.Find("Status").GetComponent<Text>();
         nickName = transform.Find("Name").GetComponent<Text>();
+
+        icon = transform.Find("Icon").GetComponent<Image>();
+        icon.sprite = Resources.Load<Sprite>("Icon/" + character.iconName);
 
 
         mpGauge = transform.Find("MPBar/MpGauge").GetComponent<RectTransform>();

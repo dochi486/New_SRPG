@@ -19427,6 +19427,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907186836}
     m_Modifications:
+    - target: {fileID: 4923787333852203169, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_Name
+      value: Icon
+      objectReference: {fileID: 0}
     - target: {fileID: 4923787335122892957, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -21767,17 +21771,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4880970569860851301, guid: 098c57aa950e999469442df41bb0021b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
+    - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
+      propertyPath: iconName
+      value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4880970569860851301, guid: 098c57aa950e999469442df41bb0021b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4880970569860851301, guid: 098c57aa950e999469442df41bb0021b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
+    - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
+      propertyPath: nickName
+      value: "\uC6A9\uC0AC"
       objectReference: {fileID: 0}
     - target: {fileID: 7541386439388233957, guid: 098c57aa950e999469442df41bb0021b, type: 3}
       propertyPath: m_RootOrder
@@ -24693,6 +24693,10 @@ PrefabInstance:
     - target: {fileID: 5362774528967013795, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: status
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5362774528967013795, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
+      propertyPath: iconName
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_RootOrder
