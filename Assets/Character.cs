@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 public enum StatusType
 {
@@ -26,6 +24,11 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     public StatusType status;
     public int maxHp = 50;
     public int maxMp = 20;
+
+    public bool completeMove;
+    public bool completeAct;
+
+    public bool CompleteTurn { get => completeMove && completeAct; }
 
     public List<Vector2Int> attackablePoints = new List<Vector2Int>();
     public int moveDistance = 5; //움직일 수 있는 영역 표시하기 위한 변수

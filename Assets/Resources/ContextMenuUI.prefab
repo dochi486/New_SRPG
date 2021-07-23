@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c78a9e1f5ef51f489171398fcf660c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  completeUiInite: 0
+  baseItem: {fileID: 0}
 --- !u!1 &2804352318352695011
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +142,7 @@ GameObject:
   - component: {fileID: 2804352318457843817}
   - component: {fileID: 2804352318457843819}
   - component: {fileID: 2804352318457843816}
+  - component: {fileID: 1671912397747384794}
   m_Layer: 5
   m_Name: MoveBackButton
   m_TagString: Untagged
@@ -163,8 +166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.026489258, y: 0}
-  m_SizeDelta: {x: -1176.1279, y: -718}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2804352318457843819
 CanvasRenderer:
@@ -187,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4716981, g: 0.45167318, b: 0.45167318, a: 0.38431373}
+  m_Color: {r: 0.2830189, g: 0.26833394, b: 0.26833394, a: 0.38431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -204,6 +207,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1671912397747384794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2804352318457843830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c8e1de23aa0b484f9c254e8ff3920e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2804352318722822183
 GameObject:
   m_ObjectHideFlags: 0

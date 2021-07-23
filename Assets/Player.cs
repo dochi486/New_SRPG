@@ -92,6 +92,8 @@ public class Player : Character
                 StageManager.GameState = GameStateType.SelectAttackTarget;
             else
                 StageManager.GameState = GameStateType.SelectPlayer;
+
+            completeAct = true;
         }
     }
 
@@ -116,6 +118,8 @@ public class Player : Character
 
     internal void AttackTarget(Character character)
     {
+        ClearEnemyExistPoint();
+
         StartCoroutine(AttackTargetCo(character));
     }
 
@@ -127,6 +131,8 @@ public class Player : Character
         animator.Play("Attack");
         attackTarget.TakeHit(power);
         yield return new WaitForSeconds(attackTime);
+
+        completeAct = true;
         StageManager.GameState = GameStateType.SelectPlayer;
 
     }
@@ -171,13 +177,17 @@ public class Player : Character
         Vector2Int playerPos = transform.position.ToVector2Int();
         var map = GroundManager.Instance.blockInfoMap;
         var path = PathFinding2D.find4(playerPos, goalPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
-        if (path.Count == 0)
-            Debug.Log("길이 없다!");
-        else if (path.Count > maxDistance + 1)
-            Debug.Log("이동할 수 없다!");
-        else
-            return true;
 
-        return false;
+        if (path.Count == 0 || path.Count > maxDistance + 1)
+            return false;
+
+        //if (path.Count == 0)
+        //    Debug.Log("길이 없다!");
+        //else if (path.Count > maxDistance + 1)
+        //    Debug.Log("이동할 수 없다!");
+        //else
+        //    return true;
+
+        return true;
     }
 }
