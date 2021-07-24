@@ -15010,6 +15010,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CharacterStateUI
       objectReference: {fileID: 0}
+    - target: {fileID: 4923787335122893154, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
 --- !u!224 &1364499536 stripped

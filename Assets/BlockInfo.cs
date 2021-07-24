@@ -197,7 +197,7 @@ public class BlockInfo : MonoBehaviour
     }
 
 
-    public LayerMask layerMask;
+    //public LayerMask layerMask;
     private void ShowMoveableDistance(int moveDistance)
     {
         //Vector2Int currentPos = transform.position.ToVector2Int();
