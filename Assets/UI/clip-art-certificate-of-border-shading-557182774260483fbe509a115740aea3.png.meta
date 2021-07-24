@@ -151,7 +151,7 @@ TextureImporter:
         height: 3631
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 2962, y: 1808, z: 2881, w: 1764}
+      border: {x: 955, y: 952, z: 949, w: 907}
       outline: []
       physicsShape: []
       tessellationDetail: 0

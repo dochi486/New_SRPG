@@ -14654,6 +14654,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 907186836}
     m_Modifications:
+    - target: {fileID: 7797691801455412613, guid: d7b90c790f1833944925f2ea19a6bcea, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7797691802505754248, guid: d7b90c790f1833944925f2ea19a6bcea, type: 3}
       propertyPath: m_Name
       value: NotifyUI
@@ -15005,10 +15009,6 @@ PrefabInstance:
     - target: {fileID: 4923787335122893154, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
       propertyPath: m_Name
       value: CharacterStateUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4923787335122893154, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 000ea5dd473f6ab44b0b85d168a2f498, type: 3}
