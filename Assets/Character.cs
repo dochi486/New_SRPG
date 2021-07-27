@@ -129,8 +129,8 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         //map 딕셔너리를 채운다 <- map 사용 안하게 리팩토링하면서 지운 것
 
         Vector3 myPosVector3 = myTr.position;
-        myPos.x = Mathf.RoundToInt(myTr.position.x); // 플레이어의 위치 저장
-        myPos.y = Mathf.RoundToInt(myTr.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
+        //myPos.x = Mathf.RoundToInt(myTr.position.x); // 플레이어의 위치 저장
+        //myPos.y = Mathf.RoundToInt(myTr.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
         var map = GroundManager.Instance.blockInfoMap;
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
