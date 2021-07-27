@@ -115,10 +115,10 @@ public class Player : Character
     {
         yield return AttackTargetCo(monster);
 
-        if (monster.status == StatusType.Die)
-        {
-            AddExp(monster.rewardExp);
-        }
+        //if (monster.status == StatusType.Die)
+        //{
+        //    AddExp(monster.rewardExp);
+        //}
 
         StageManager.GameState = GameStateType.SelectPlayer;
         //기존 AttackTarget 코루틴이 끝난 다음에 실행되도록 해야 플레이어가 정상적으로 공격하고 GameState가 변하도록 작동한다. 
