@@ -125,7 +125,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         //passableValues = new List<int>(); 
         //passableValues.Add((int)BlockType.Walkable); //지나갈 수 있는 타일을 int로 저장
         Transform myTr = transform;
-        Vector2Int myPos = new Vector2Int(Mathf.RoundToInt(myTr.position.x), Mathf.RoundToInt(myTr.position.z)); //시작지점
+        Vector2Int myPos = myTr.position.ToVector2Int(); //시작지점
         //자식 오브젝트의 blockinfo 가져오기 <- map 사용 안하게 리팩토링하면서 지운 것
         //map 딕셔너리를 채운다 <- map 사용 안하게 리팩토링하면서 지운 것
 
@@ -135,7 +135,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         var map = GroundManager.Instance.blockInfoMap;
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
-        List<Vector2Int> path = PathFinding2D.find4(myPos, destPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
+        List<Vector2Int> path = PathFinding2D.find4(myPos, destPos, map, passableValues);
 
         if (path.Count == 0)
             Debug.Log("길이 없다.");
@@ -166,7 +166,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
                 // 움직이는 시간 만큼 기다리자
                 yield return new WaitForSeconds(moveTimePerUnit);
             }
-            Player.SelectedPlayer.PlayAnimation("Idle");
+            PlayAnimation("Idle");
             // 이동이 끝나면 Idle애니메이션을 실행시키자
             FollowTarget.Instance.SetTarget(null);
             // null을 주어 카메라가 따라가지 않도록 하자
