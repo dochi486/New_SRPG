@@ -148,11 +148,13 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
             if (CharacterType == CharacterTypeEnum.Monster)
                 path.RemoveAt(path.Count - 1); //캐릭터가 몬스터일 때 path의 마지막 인덱스 값(플레이어의 위치)을 삭제해야 플레이어 위치와 겹치지 않게 이동한다. 
-            
+
+            if (path.Count > moveDistance)
+                path.RemoveRange(moveDistance, path.Count - moveDistance); //RemoveRange(자를 범위 시작하는 인덱스, 자를 갯수);
 
             foreach (var item in path) //길이 있다면 path에 저장된 위치를 하나씩 불러와 이동시키는 것
             {
-                Vector3 playerNewPos = new Vector3(item.x, 0, item.y);
+                Vector3 playerNewPos = new Vector3(item.x, myPosVector3.y, item.y);
                 myTr.LookAt(playerNewPos);
                 // 플레이어가 움직일 때 자연스럽게 움직이도록 하자
                 // DOMove함수는 DOTween을 임포트하여 가져온 함수
@@ -165,7 +167,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
             // 이동이 끝나면 Idle애니메이션을 실행시키자
             FollowTarget.Instance.SetTarget(null);
             // null을 주어 카메라가 따라가지 않도록 하자
-            GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player, this);
+            GroundManager.Instance.AddBlockInfo(myTr.position, GetBlockType(), this);
             // 이동한 위치에는 플레이어 정보 추가
 
             completeAct = true;
