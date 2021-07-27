@@ -152,8 +152,10 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
             if (CharacterType == CharacterTypeEnum.Monster)
                 path.RemoveAt(path.Count - 1); //캐릭터가 몬스터일 때 path의 마지막 인덱스 값(플레이어의 위치)을 삭제해야 플레이어 위치와 겹치지 않게 이동한다. 
 
-            if (path.Count > moveDistance)
-                path.RemoveRange(moveDistance, path.Count - moveDistance); //RemoveRange(자를 범위 시작하는 인덱스, 자를 갯수);
+            if (path.Count > moveDistance) //path에 담긴 위치들(path.Count)이 실제로 이동할 수 있는 범위보다 크면 
+                path.RemoveRange(moveDistance, path.Count - moveDistance); 
+                //RemoveRange(자를 범위 시작하는 인덱스, 자를 갯수);
+                //moveDistance만큼만 움직일 수 있게 나머지 부분 절삭
 
             foreach (var item in path) //길이 있다면 path에 저장된 위치를 하나씩 불러와 이동시키는 것
             {
