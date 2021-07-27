@@ -227,7 +227,7 @@ MonoBehaviour:
   power: 10
   hp: 30
   mp: 25
-  status: 1
+  status: 0
   maxHp: 50
   maxMp: 50
   completeMove: 0

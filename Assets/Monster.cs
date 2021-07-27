@@ -8,7 +8,7 @@ using UnityEngine;
 public class Monster : Character
 {
     public static List<Monster> Monsters = new List<Monster>(); //static이라서 이름을 대문자로 시작
-    internal object rewardExp;
+    internal int rewardExp = 10;
 
     //Animator animator;
     public override CharacterTypeEnum CharacterType { get => CharacterTypeEnum.Monster; }

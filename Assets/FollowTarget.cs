@@ -2,7 +2,7 @@
 
 public class FollowTarget : SingletonMonoBehavior<FollowTarget>
 {
-    Transform target;
+    public Transform target;
     public Vector3 offset = new Vector3(0,0,-7);
     public void SetTarget(Transform target) // 타겟의 transform을 가져와 target멤버변수 값 할당
     {
@@ -10,7 +10,7 @@ public class FollowTarget : SingletonMonoBehavior<FollowTarget>
         if(target)
         {
             var pos = target.position; //카메라의 기존 높이를 유지해야 카메라가 땅 밑으로 가는 버그를 막을 수 있다. 
-
+            pos.y = transform.position.y;
             transform.position = pos + offset;
         }
     }
