@@ -15,7 +15,7 @@ public enum GameStateType
 }
 public class StageManager : SingletonMonoBehavior<StageManager>
 {
-    [SerializeField] GameStateType gameState;
+    [SerializeField] GameStateType m_gameState;
 
     static public GameStateType GameState
     {

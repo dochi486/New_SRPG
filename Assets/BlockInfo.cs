@@ -144,7 +144,12 @@ public class BlockInfo : MonoBehaviour
         {
             if (Player.SelectedPlayer.CanAttackTarget(character))
             {
+                ClearMoveableArea();
                 Player.SelectedPlayer.AttackTarget((Monster)character);
+            }
+            else
+            {
+                NotifyUI.Instance.Show("공격할 수 없는 위치입니다.");
             }
         }
         else
