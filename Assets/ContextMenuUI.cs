@@ -41,6 +41,9 @@ public class ContextMenuUI : BaseUI<ContextMenuUI>
     private void EndTurnPlayer()
     {
         print("EndTurnPlayer");
+
+        StageManager.Instance.EndTurnPlayer();
+
         OnClick();
     }
 

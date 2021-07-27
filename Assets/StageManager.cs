@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 
 public enum GameStateType
@@ -39,4 +41,19 @@ public class StageManager : SingletonMonoBehavior<StageManager>
             ContextMenuUI.Instance.Show(Input.mousePosition);
     }
 
+    internal void EndTurnPlayer()
+    {
+        GameState = GameStateType.MonsterTurn;
+
+        StartCoroutine(MonsterTurnCo());
+    }
+
+    IEnumerator MonsterTurnCo()
+    {
+        foreach(var monster in Monster.Monsters)
+        {
+            FollowTarget.Instance.SetTarget(monster.transform);
+            yield return monster.AutoAttackCo();
+        }
+    }
 }

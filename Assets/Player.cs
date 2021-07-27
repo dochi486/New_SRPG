@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Player : Character
 {
+    public static List<Player> Players = new List<Player>();
     public override CharacterTypeEnum CharacterType { get => CharacterTypeEnum.Player; }
 
     static public Player SelectedPlayer;

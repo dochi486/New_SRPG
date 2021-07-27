@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System;
+using System.Collections;
 using UnityEngine;
 public enum StatusType
 {
@@ -30,10 +32,10 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
     public bool CompleteTurn { get => completeMove && completeAct; }
 
-    public List<Vector2Int> attackablePoints = new List<Vector2Int>();
+    public List<Vector2Int> attackablePoints = new List<Vector2Int>(); //공격 가능한 위치를 모아두는 리스트
     public int moveDistance = 5; //움직일 수 있는 영역 표시하기 위한 변수
 
-    private void Awake()
+    protected void Awake()
     {
         var attackPoints = GetComponentsInChildren<AttackPoint>(true); //파라미터를 true로 줬기 때문에 오브젝트가 꺼져있더라도 가져올 수 있다
         //공격 가능한 범위를 모아두는 부분
