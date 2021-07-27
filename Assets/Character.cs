@@ -70,13 +70,13 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
     public float attackTime = 1;
-    internal IEnumerator TakeHit(int power)
+    internal IEnumerator TakeHitCo(int power)
     {
         GameObject damageTextGoInResource = (GameObject)Instantiate(Resources.Load("DamageText"));
         var pos = transform.position;
         pos.y = 1.71f; //리소스에서 불러오는 데미지텍스트의 y축 값을 항상 고정하여 똑같은 위치에 생성 되도록한다. 
         GameObject damageTextGo = Instantiate(damageTextGoInResource, pos, damageTextGoInResource.transform.rotation, transform); //transform(몬스터)를 부모로 하여 생성된다.
-        damageTextGoInResource.transform.localPosition = new Vector3(0, 1.71f, 0); //몬스터로부터 y축으로 1.3f만큼 위에 데미지텍스트 프리팹 생성
+        //damageTextGoInResource.transform.localPosition = new Vector3(0, 1.71f, 0); //몬스터로부터 y축으로 1.3f만큼 위에 데미지텍스트 프리팹 생성
         damageTextGo.GetComponent<TextMeshPro>().text = power.ToString(); //플레이어의 power를 string으로 변환하여 텍스트메쉬프로에 대입한다
         Destroy(damageTextGo, 2); //Destroy의 첫번째 파라미터는 파괴할 대상, 두 번째 파라미터는 딜레이시간
 
@@ -198,7 +198,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         transform.LookAt(attackTarget.transform); 
 
         animator.Play("Attack");
-        attackTarget.TakeHit(power);
+        attackTarget.TakeHitCo(power);
         yield return new WaitForSeconds(attackTime);
 
         completeAct = true;
