@@ -68,6 +68,8 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
     public BlockType passableValues = BlockType.Walkable | BlockType.Water;
     public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
+
+    public float attackTime = 1;
     internal IEnumerator TakeHit(int power)
     {
         GameObject damageTextGoInResource = (GameObject)Instantiate(Resources.Load("DamageText"));
@@ -177,7 +179,6 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     }
 
 
-
     protected bool IsInAttackableArea(Vector3 enemyPosition)
     {
         Vector2Int enemyPositionVector2 = enemyPosition.ToVector2Int();
@@ -191,6 +192,16 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
                 return true;
         }
         return false;
+    }
+    protected IEnumerator AttackTargetCo(Character attackTarget)
+    {
+        transform.LookAt(attackTarget.transform); 
+
+        animator.Play("Attack");
+        attackTarget.TakeHit(power);
+        yield return new WaitForSeconds(attackTime);
+
+        completeAct = true;
     }
 
 }

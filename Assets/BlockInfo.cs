@@ -133,7 +133,7 @@ public class BlockInfo : MonoBehaviour
         {
             if (Player.SelectedPlayer.CanAttackTarget(character))
             {
-                Player.SelectedPlayer.AttackTarget(character);
+                Player.SelectedPlayer.AttackTarget((Monster)character);
             }
         }
     }
@@ -144,7 +144,7 @@ public class BlockInfo : MonoBehaviour
         {
             if (Player.SelectedPlayer.CanAttackTarget(character))
             {
-                Player.SelectedPlayer.AttackTarget(character);
+                Player.SelectedPlayer.AttackTarget((Monster)character);
             }
         }
         else

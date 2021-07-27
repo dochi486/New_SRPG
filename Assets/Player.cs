@@ -85,25 +85,30 @@ public class Player : Character
         return true;
     }
 
-    internal void AttackTarget(Character character)
+    internal void AttackTarget(Monster character)
     {
         ClearEnemyExistPoint();
 
-        StartCoroutine(AttackTargetCo(character));
+        StartCoroutine(AttackTargetCo_(character));
     }
 
-    public float attackTime = 1;
-    private IEnumerator AttackTargetCo(Character attackTarget)
+    protected IEnumerator AttackTargetCo_(Monster monster)
     {
-        transform.LookAt(attackTarget.transform); 
+        yield return AttackTargetCo(monster);
 
-        animator.Play("Attack");
-        attackTarget.TakeHit(power);
-        yield return new WaitForSeconds(attackTime);
+        if(monster.status == StatusType.Die)
+        {
+            AddExp(monster.rewardExp);
+        }
 
-        completeAct = true;
         StageManager.GameState = GameStateType.SelectPlayer;
+        //기존 AttackTarget 코루틴이 끝난 다음에 실행되도록 해야 플레이어가 정상적으로 공격하고 GameState가 변하도록 작동한다. 
+        //코루틴으로 한 번 더 감싸서 몬스터와 플레이어가 똑같은 AttackTargetCo 메서드를 사용할 수 있도록 바꿔줬다. 
+    }
 
+    private void AddExp(object rewardExp)
+    {
+        throw new NotImplementedException();
     }
 
     private bool IsEnemyExist(BlockInfo blockInfo)
