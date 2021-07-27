@@ -2,21 +2,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : Character
 {
-    public static List<Player> Players = new List<Player>();
+    public static List<Player> Players = new List<Player>(); //static이라서 리스트 이름을 대문자로 시작해준다.
     public override CharacterTypeEnum CharacterType { get => CharacterTypeEnum.Player; }
 
     static public Player SelectedPlayer;
     //Animator animator;
 
+    new protected void Awake()
+    {
+        base.Awake();
+        Players.Add(this);
+    }
+    new protected void OnDestroy()
+    {
+        base.OnDestroy();
+        Players.Remove(this);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         //SelectedPlayer = this; //왜 주석처리했을까?
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this);
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
         FollowTarget.Instance.SetTarget(transform);
@@ -39,7 +51,7 @@ public class Player : Character
     internal bool ShowAttackableArea()
     {
         //bool existEnemy = false; //적이 존재하는지 확인
-        Vector2Int currentPos = transform.position.ToVector2Int();
+        Vector2Int currentPos = transform.position.ToVector2Int(); //현재 위치에서 공격 가능한 범위를 확인
         var map = GroundManager.Instance.blockInfoMap;
 
         foreach (var item in attackableLocalPositions) //공격 가능한 위치에 적이 있는지 확인???? 
@@ -48,7 +60,7 @@ public class Player : Character
 
             if (map.ContainsKey(pos)) //position 키가 있을 때만 조건으로 들어가도록 (비어있지 않은 땅에 대해서만 검사)
             {
-                if (IsEnemyExist(map[pos]))
+                if (IsEnemyExist(map[pos])) //map[pos]에 적이 있는지 확인
                 {
                     enemyExistPoint.Add(map[pos]);
                 }
@@ -77,9 +89,11 @@ public class Player : Character
 
     public Ease moveEase = Ease.Linear;
 
-    internal bool CanAttackTarget(Character character)
+    internal bool CanAttackTarget(Character enemy)
     {
-        if (character.CharacterType != CharacterTypeEnum.Monster)
+        if (enemy.CharacterType != CharacterTypeEnum.Monster) //다른 플레이어를 공격하지 않게한다.
+            return false;
+        if (IsInAttackableArea(enemy.transform.position) == false) //공격 가능한 범위 안에 있는지 확인하고 
             return false;
 
         return true;
@@ -92,11 +106,16 @@ public class Player : Character
         StartCoroutine(AttackTargetCo_(character));
     }
 
+    public override BlockType GetBlockType()
+    {
+        return BlockType.Player;
+    }
+
     protected IEnumerator AttackTargetCo_(Monster monster)
     {
         yield return AttackTargetCo(monster);
 
-        if(monster.status == StatusType.Die)
+        if (monster.status == StatusType.Die)
         {
             AddExp(monster.rewardExp);
         }
@@ -140,5 +159,15 @@ public class Player : Character
         //    return true;
 
         return true;
+    }
+
+    protected override void OnDie()
+    {
+        //플레이어가 죽은 경우에는
+        //모든 플레이어가 죽었는지 확인하고 모든 플레이어가 죽었다면 게임오버
+        if (Players.Where(x => x.status != StatusType.Die).Count() == 0)
+        {
+            CenterNotifyUI.Instance.Show("게임오버");
+        }
     }
 }
