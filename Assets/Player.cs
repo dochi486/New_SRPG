@@ -36,9 +36,39 @@ public class Player : Character
         StopAllCoroutines();
         StartCoroutine(FindPathCo(goalPos));
     }
+    internal bool ShowAttackableArea()
+    {
+        //bool existEnemy = false; //적이 존재하는지 확인
+        Vector2Int currentPos = transform.position.ToVector2Int();
+        var map = GroundManager.Instance.blockInfoMap;
+
+        foreach (var item in attackableLocalPositions) //공격 가능한 위치에 적이 있는지 확인???? 
+        {
+            Vector2Int pos = item + currentPos; //item(공격가능한 지점)의 월드 위치와 플레이어의 위치!
+
+            if (map.ContainsKey(pos)) //position 키가 있을 때만 조건으로 들어가도록 (비어있지 않은 땅에 대해서만 검사)
+            {
+                if (IsEnemyExist(map[pos]))
+                {
+                    enemyExistPoint.Add(map[pos]);
+                }
+            }
+        }
+        enemyExistPoint.ForEach(x => x.ChangeColor(Color.red));
+
+        return enemyExistPoint.Count > 0;
+    }
 
     public List<BlockInfo> enemyExistPoint = new List<BlockInfo>();
 
+    protected override void OnCompleteMove()
+    {
+        bool existAttackTarget = ShowAttackableArea();
+        if (existAttackTarget)
+            StageManager.GameState = GameStateType.SelectAttackTarget;
+        else
+            StageManager.GameState = GameStateType.SelectPlayer;
+    }
     public void ClearEnemyExistPoint()
     {
         enemyExistPoint.ForEach(x => x.ChangeToOriginalColor());
@@ -46,7 +76,6 @@ public class Player : Character
     }
 
     public Ease moveEase = Ease.Linear;
-    public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
 
     internal bool CanAttackTarget(Character character)
     {

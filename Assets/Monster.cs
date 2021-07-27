@@ -53,19 +53,9 @@ public class Monster : Character
         return nearestPlayer;
     }
 
-    protected override FindPathCo(Vector2Int vector2Int)
-    {
-        throw new NotImplementedException();
-    }
 
     private object AttackTargetCo(Player enemyPlayer)
     {
         throw new NotImplementedException();
     }
-
-    private bool IsInAttackableArea(Vector3 position)
-    {
-        throw new NotImplementedException();
-    }
-
 }

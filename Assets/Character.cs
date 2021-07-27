@@ -34,7 +34,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
     public bool CompleteTurn { get => completeMove && completeAct; }
 
-    public List<Vector2Int> attackablePoints = new List<Vector2Int>(); //공격 가능한 위치를 모아두는 리스트
+    public List<Vector2Int> attackableLocalPositions = new List<Vector2Int>(); //공격 가능한 위치를 모아두는 리스트
     public int moveDistance = 5; //움직일 수 있는 영역 표시하기 위한 변수
 
     protected Animator animator;
@@ -44,20 +44,20 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         var attackPoints = GetComponentsInChildren<AttackPoint>(true); //파라미터를 true로 줬기 때문에 오브젝트가 꺼져있더라도 가져올 수 있다
         //공격 가능한 범위를 모아두는 부분
         foreach (var item in attackPoints) //바로 앞에 있는 공격 가능한 지점
-            attackablePoints.Add(item.transform.localPosition.ToVector2Int());
+            attackableLocalPositions.Add(item.transform.localPosition.ToVector2Int());
 
         //오른쪽에 있는 공격 가능한 지점들
         transform.Rotate(0, 90, 0);
         foreach (var item in attackPoints) //오른쪽에 있는 공격 가능한 지점
-            attackablePoints.Add((item.transform.position - transform.position).ToVector2Int());
+            attackableLocalPositions.Add((item.transform.position - transform.position).ToVector2Int());
 
         transform.Rotate(0, 90, 0);
         foreach (var item in attackPoints) //아래쪽에 있는 공격 가능한 지점
-            attackablePoints.Add((item.transform.position - transform.position).ToVector2Int());
+            attackableLocalPositions.Add((item.transform.position - transform.position).ToVector2Int());
 
         transform.Rotate(0, 90, 0);
         foreach (var item in attackPoints) //왼쪽에 있는 공격 가능한 지점
-            attackablePoints.Add((item.transform.position - transform.position).ToVector2Int());
+            attackableLocalPositions.Add((item.transform.position - transform.position).ToVector2Int());
 
         transform.Rotate(0, 90, 0); //다시 원래 방향(앞)을 보도록 회전 시킨다
 
@@ -67,6 +67,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     public float takeHitTime = 0.3f;
 
     public BlockType passableValues = BlockType.Walkable | BlockType.Water;
+    public float moveTimePerUnit = 0.3f; //한 칸 이동할 때 걸리는 시간
     internal IEnumerator TakeHit(int power)
     {
         GameObject damageTextGoInResource = (GameObject)Instantiate(Resources.Load("DamageText"));
@@ -116,41 +117,47 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         animator.Play(nodName, 0, 0);
     }
 
-    protected IEnumerator FindPathCo(Vector2Int goalPos)
+    protected IEnumerator FindPathCo(Vector2Int destPos) //destination Position
     {
         //passableValues = new List<int>(); 
         //passableValues.Add((int)BlockType.Walkable); //지나갈 수 있는 타일을 int로 저장
-        Transform player = transform;
-        Vector2Int playerPos = new Vector2Int(Mathf.RoundToInt(player.position.x), Mathf.RoundToInt(player.position.z)); //시작지점
-        //자식 오브젝트의 blockinfo 가져오기
+        Transform myTr = transform;
+        Vector2Int myPos = new Vector2Int(Mathf.RoundToInt(myTr.position.x), Mathf.RoundToInt(myTr.position.z)); //시작지점
+        //자식 오브젝트의 blockinfo 가져오기 <- map 사용 안하게 리팩토링하면서 지운 것
+        //map 딕셔너리를 채운다 <- map 사용 안하게 리팩토링하면서 지운 것
 
-        //map 딕셔너리를 채운다
-
-        playerPos.x = Mathf.RoundToInt(player.position.x); // 플레이어의 위치 저장
-        playerPos.y = Mathf.RoundToInt(player.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
+        Vector3 myPosVector3 = myTr.position;
+        myPos.x = Mathf.RoundToInt(myTr.position.x); // 플레이어의 위치 저장
+        myPos.y = Mathf.RoundToInt(myTr.position.z); //벡터2를 쓰고 있지만 실제로 y말고 z축의 값을 사용하고 있기 때문에 암시적 형변환+z사용
         var map = GroundManager.Instance.blockInfoMap;
         //goalPos.x = (int)goal.position.x;
         //goalPos.y = (int)goal.position.z;
-        List<Vector2Int> path = PathFinding2D.find4(playerPos, goalPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
+        List<Vector2Int> path = PathFinding2D.find4(myPos, destPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
 
         if (path.Count == 0)
             Debug.Log("길이 없다.");
         else
         {
-            GroundManager.Instance.RemoveBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player);
+            GroundManager.Instance.RemoveBlockInfo(myPosVector3,GetBlockType()); 
+            //Player에 있던 FindPath를 부모 클래스로 끌어오기 하면서 플레이어만 사용하는 게 아니라 몬스터도 쓸 수 있도록 범용함수로 리팩토링
             //플레이어가 이동하면 원래 있던 위치의 블록타입에서 Player타입 제거
-            Player.SelectedPlayer.PlayAnimation("Walk");
+            PlayAnimation("Walk");
             // FollowTarget의 SetTarget을 실행시켜 선택된 캐릭터를 카메라가 따라가게 하자
-            FollowTarget.Instance.SetTarget(Player.SelectedPlayer.transform); //FollowTarget의 SetTarget을 실행하여 선택한 캐릭터를 카메라가 따라간다
+            FollowTarget.Instance.SetTarget(myTr); //FollowTarget의 SetTarget을 실행하여 선택한 캐릭터를 카메라가 따라간다
             path.RemoveAt(0); //처음에 자기가 위치한 블럭의 인덱스를 삭제해서 제자리에서 애니메이션하지 않도록
+
+            if (CharacterType == CharacterTypeEnum.Monster)
+                path.RemoveAt(path.Count - 1); //캐릭터가 몬스터일 때 path의 마지막 인덱스 값(플레이어의 위치)을 삭제해야 플레이어 위치와 겹치지 않게 이동한다. 
+            
+
             foreach (var item in path) //길이 있다면 path에 저장된 위치를 하나씩 불러와 이동시키는 것
             {
                 Vector3 playerNewPos = new Vector3(item.x, 0, item.y);
-                player.LookAt(playerNewPos);
+                myTr.LookAt(playerNewPos);
                 // 플레이어가 움직일 때 자연스럽게 움직이도록 하자
                 // DOMove함수는 DOTween을 임포트하여 가져온 함수
                 //player.position = playerNewPos;
-                player.DOMove(playerNewPos, moveTimePerUnit).SetEase(moveEase);
+                myTr.DOMove(playerNewPos, moveTimePerUnit);
                 // 움직이는 시간 만큼 기다리자
                 yield return new WaitForSeconds(moveTimePerUnit);
             }
@@ -161,37 +168,27 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
             GroundManager.Instance.AddBlockInfo(Player.SelectedPlayer.transform.position, BlockType.Player, this);
             // 이동한 위치에는 플레이어 정보 추가
 
-            bool existAttackTarget = ShowAttackableArea();
-            if (existAttackTarget)
-                StageManager.GameState = GameStateType.SelectAttackTarget;
-            else
-                StageManager.GameState = GameStateType.SelectPlayer;
-
             completeAct = true;
+
+            OnCompleteMove();
         }
     }
 
-    internal bool ShowAttackableArea()
+
+
+    protected bool IsInAttackableArea(Vector3 enemyPosition)
     {
-        //bool existEnemy = false; //적이 존재하는지 확인
+        Vector2Int enemyPositionVector2 = enemyPosition.ToVector2Int();
         Vector2Int currentPos = transform.position.ToVector2Int();
-        var map = GroundManager.Instance.blockInfoMap;
 
-        foreach (var item in attackablePoints) //공격 가능한 위치에 적이 있는지 확인???? 
+        foreach (var item in attackableLocalPositions)
         {
-            Vector2Int pos = item + currentPos; //item(공격가능한 지점)의 월드 위치와 플레이어의 위치!
+            Vector2Int pos = item + currentPos;
 
-            if (map.ContainsKey(pos)) //position 키가 있을 때만 조건으로 들어가도록 (비어있지 않은 땅에 대해서만 검사)
-            {
-                if (IsEnemyExist(map[pos]))
-                {
-                    enemyExistPoint.Add(map[pos]);
-                }
-            }
+            if (pos == enemyPositionVector2)
+                return true;
         }
-        enemyExistPoint.ForEach(x => x.ChangeColor(Color.red));
-
-        return enemyExistPoint.Count > 0;
+        return false;
     }
 
 }
