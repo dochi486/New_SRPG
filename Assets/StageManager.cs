@@ -44,7 +44,7 @@ public class StageManager : SingletonMonoBehavior<StageManager>
 
         StartCoroutine(MonsterTurnCo()); //중첩코루틴!
     }
-    IEnumerator MonsterTurnCo()
+    private IEnumerator MonsterTurnCo()
     {
         foreach (var monster in Monster.Monsters)
         {
