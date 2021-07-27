@@ -199,7 +199,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         transform.LookAt(attackTarget.transform); 
 
         animator.Play("Attack");
-        StartCoroutine(TakeHitCo(power));
+        StartCoroutine(attackTarget.TakeHitCo(power));
         yield return new WaitForSeconds(attackTime);
 
         completeAct = true;
