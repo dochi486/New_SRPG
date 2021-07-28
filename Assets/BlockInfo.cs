@@ -13,6 +13,7 @@ public enum BlockType
     Water = 1 << 1,
     Player = 1 << 2,
     Monster = 1 << 3,
+    Item = 1 << 4,
 }
 
 public class BlockInfo : MonoBehaviour
@@ -242,6 +243,7 @@ public class BlockInfo : MonoBehaviour
     string debugTextPrefab = "DebugTextPrefab"; // 리소스에서 생성할 DebugTextPrefab의 이름 저장
     GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수
     internal Character character;
+    public int dropItemID;
 
     internal void UpdateDebugInfo()
     {

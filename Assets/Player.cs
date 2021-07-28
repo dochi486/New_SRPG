@@ -164,7 +164,7 @@ public class Player : Character
             AddExp(monster.rewardExp);
 
             if (monster.dropItemGroup.ratio > Random.Range(0, 1f))
-                DropItem(monster.dropItemGroup.dropItemID); //몬스터가 가지고 있는 드롭아이템그룹 아이디를 가지고 그 아이템 그룹을 드랍시킨다. 
+                DropItem(monster.dropItemGroup.dropItemID, monster.transform.position); //몬스터가 가지고 있는 드롭아이템그룹 아이디를 가지고 그 아이템 그룹을 드랍시킨다. 
 
 
         }
@@ -180,7 +180,7 @@ public class Player : Character
         DropItem(1);
     }
 
-    private void DropItem(int dropGroupID)
+    private void DropItem(int dropGroupID, Vector3? position = null) //포지션 값이 없으면 null?
     {
         var dropGroup = GlobalData.Instance.dropItemGroupDataMap[dropGroupID];
         var dropItemRatioInfo = dropGroup.dropItems.OrderByDescending(x => x.ratio * Random.Range(0, 1f)).First();
@@ -190,6 +190,8 @@ public class Player : Character
 
         var dropItem = GlobalData.Instance.itemDataMap[dropItemRatioInfo.dropItemID];
         print(dropItem.ToString());
+
+        GroundManager.Instance.AddBlockInfo(position.Value, BlockType.Item, dropItem.ID);
     }
 
     public SaveInt exp, level;

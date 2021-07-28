@@ -74,9 +74,17 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         }
     }
 
+    public void AddBlockInfo(Vector3 position, BlockType addBlockType, int dropItemID) //드랍된 아이템 정보를 블럭에 추가하는 함수
+    {
+        Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
+        blockInfoMap[pos].blockType |= addBlockType;
+        blockInfoMap[pos].dropItemID = dropItemID;
+        if (useDebugMode)
+            blockInfoMap[pos].UpdateDebugInfo();
+    }
 
     //블록에 추가로 타입을 넣어주기 위한 함수 
-    internal void AddBlockInfo(Vector3 position, BlockType addBlockType, Character character)
+    public void AddBlockInfo(Vector3 position, BlockType addBlockType, Character character)
     {
         // 실행한 곳의 position 정보를 담고 있는 pos를 생성
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
