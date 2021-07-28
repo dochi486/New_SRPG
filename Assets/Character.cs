@@ -102,7 +102,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
     protected virtual void OnDestroy()
     {
-        if (GroundManager.ApplicationQuit == false)
+        if (GroundManager.ApplicationQuit == true)
             return;
 
         GroundManager.Instance.RemoveBlockInfo(transform.position, GetBlockType()); 
