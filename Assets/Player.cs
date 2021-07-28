@@ -20,7 +20,7 @@ public class Player : Character
         base.Awake();
         Players.Add(this);
         exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
-        level = new SaveInt("level" + ID);
+        level = new SaveInt("level" + ID); //키는 절대 중복되면 안된다!
         comment = new SaveString("comment" + ID);
     }
     new protected void OnDestroy()
@@ -139,9 +139,9 @@ public class Player : Character
     }
 
     public SaveInt exp, level;
-    public int maxExp;
     public SaveString comment;
-
+    public int maxExp;
+ 
     private void AddExp(int rewardExp)
     {
         //플레이어의 기존 경험치에 몬스터를 죽이면서 얻은 경험치 추가

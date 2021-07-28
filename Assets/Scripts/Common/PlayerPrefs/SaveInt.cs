@@ -43,7 +43,7 @@ public class SaveInt
     int value;
     public SaveInt(string _key)
     {
-        //key = Application.dataPath + GetType() + _key;
+        //key = Application.dataPath + GetType() + _key; //멀티플레이 기능이 있는 프로젝트에서 사용하는 내용이기 때문에 주석 처리 해두셨다.    
         key = GetType() + _key;
 
         if (PlayerPrefs.HasKey(key))
