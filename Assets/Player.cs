@@ -180,6 +180,9 @@ public class Player : Character
         //최대 경험치를 넘으면 레벨 업!
         if (exp.Value >= maxExp)
         {
+            exp.Value = exp.Value - maxExp;  //exp를 0으로 만드는 부분
+
+            level.Value++; //레벨의 값이 증가해야 맵에서 읽어올 수 있다. 
             SetLevelData(); //레벨이 오르면 hp,mp회복
 
             CenterNotifyUI.Instance.Show($"lv{level}이 되었습니다.");
