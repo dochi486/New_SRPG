@@ -13,10 +13,15 @@ public class Player : Character
     static public Player SelectedPlayer;
     //Animator animator;
 
+    public int ID; //SaveInt의 키로 사용할 플레이어 고유의 ID
+
     new protected void Awake()
     {
         base.Awake();
         Players.Add(this);
+        exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
+        level = new SaveInt("level" + ID);
+        comment = new SaveString("comment" + ID);
     }
     new protected void OnDestroy()
     {
@@ -125,8 +130,9 @@ public class Player : Character
         //코루틴으로 한 번 더 감싸서 몬스터와 플레이어가 똑같은 AttackTargetCo 메서드를 사용할 수 있도록 바꿔줬다. 
     }
 
-    public int exp, level;
+    public SaveInt exp, level;
     public int maxExp;
+    public SaveString comment;
 
     private void AddExp(int rewardExp)
     {
@@ -136,10 +142,10 @@ public class Player : Character
         //최대 경험치를 넘으면 레벨 업!
 
 
-        PlayerPrefs.SetInt("exp", exp); //플레이어의 경험치를 저장
-        PlayerPrefs.Save(); //SetInt에서 지정한 키의 exp 값을 저장
+        //PlayerPrefs.SetInt("exp", exp); //플레이어의 경험치를 저장
+        //PlayerPrefs.Save(); //SetInt에서 지정한 키의 exp 값을 저장
 
-        exp = PlayerPrefs.GetInt("exp"); // PlayerPrefs로 저장한 값을 불러오는 것
+        //exp = PlayerPrefs.GetInt("exp"); // PlayerPrefs로 저장한 값을 불러오는 것
     }
 
     private bool IsEnemyExist(BlockInfo blockInfo)
