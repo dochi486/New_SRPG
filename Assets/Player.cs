@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Player : Character
 {
@@ -161,11 +162,27 @@ public class Player : Character
         if (monster.status == StatusType.Die)
         {
             AddExp(monster.rewardExp);
+
+            DropItem(monster.dropGroupID); //몬스터가 가지고 있는 드롭아이템그룹 아이디를 가지고 그 아이템 그룹을 드랍시킨다. 
+
+
         }
 
         StageManager.GameState = GameStateType.SelectPlayer;
         //기존 AttackTarget 코루틴이 끝난 다음에 실행되도록 해야 플레이어가 정상적으로 공격하고 GameState가 변하도록 작동한다. 
         //코루틴으로 한 번 더 감싸서 몬스터와 플레이어가 똑같은 AttackTargetCo 메서드를 사용할 수 있도록 바꿔줬다. 
+    }
+
+    private void DropItem(int dropGroupID)
+    {
+        var dropGroup = GlobalData.Instance.dropItemGroupDataMap[dropGroupID];
+        var dropItemRatioInfo = dropGroup.dropItems.OrderByDescending(x => x.ratio * Random.Range(0, 1f)).First();
+        //드랍확률 * 0~100% 사이의 값 곱한 것 중 하나만 사용한다 First
+        //아이템의 드랍확률 정보를 가지고 있는 var
+        print($"{dropItemRatioInfo.dropItemID}, {dropItemRatioInfo.ratio}");
+
+        var dropItem = GlobalData.Instance.itemDataMap[dropItemRatioInfo.dropItemID];
+        print(dropItem.ToString());
     }
 
     public SaveInt exp, level;

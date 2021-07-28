@@ -23,6 +23,11 @@ public class ItemData
     public int sellPrice;
     public int buyPrice;
     public string iconName;
+
+    public override string ToString()
+    {
+        return $"{ID}, 아이콘 이름: {iconName}, 판매 가격: {sellPrice}, 구입 가격: {buyPrice}";
+    }
 }
 
 [System.Serializable]
@@ -38,6 +43,12 @@ public class ItemDropInfo
 {
     public int dropItemID; //드랍되는 아이템의 id
     public float ratio; //아이템 드랍률
+
+    public override string ToString()
+    {
+        return $"{dropItemID}, {ratio}";
+    }
+
 }
 
 public class GlobalData : SingletonMonoBehavior<GlobalData>
