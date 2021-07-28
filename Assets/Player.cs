@@ -29,7 +29,7 @@ public class Player : Character
     {
         //SelectedPlayer = this; //왜 주석처리했을까?
         //animator = GetComponentInChildren<Animator>();
-        GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this);
+        GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this); //플레이어가 처음에 서 있는 블록은 walkable밖에 지정 안되어있다.
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
         FollowTarget.Instance.SetTarget(transform);
     }
@@ -145,10 +145,12 @@ public class Player : Character
     {
         Vector2Int goalPos = position.ToVector2Int();
         Vector2Int playerPos = transform.position.ToVector2Int();
-        var map = GroundManager.Instance.blockInfoMap;
+        var map = GroundManager.Instance.blockInfoMap; //모든 블록정보를 가지고 있는 map
         var path = PathFinding2D.find4(playerPos, goalPos, (Dictionary<Vector2Int, BlockInfo>)map, passableValues);
+        //블록 정보를 이용해서 해당 블록과 플레이어 사이의 경로를 찾는다.
 
-        if (path.Count == 0 || path.Count > maxDistance + 1)
+
+        if (path.Count == 0 || path.Count > maxDistance + 1) //처음 path의 값은 자기 자신의 위치값이므로 maxDistance+1을 해준다.. 
             return false;
 
         //if (path.Count == 0)
