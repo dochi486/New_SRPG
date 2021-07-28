@@ -35,12 +35,16 @@ public class Player : Character
         //딕셔너리로 하면 리스트의 인덱스가 꼬이더라도 상관이 없지만 딕셔너리로 하게 되면 인스펙터에서 확인이 불가하기 때문에
         //일단은 리스트로 사용.. ! 
         //List와 map을 사용하는 게 딕셔너리의 값을 노출하는 게 List고 map은 실제 데이터를 담는 딕셔너리로 사용하기 위해서였따!
+        SetLevelData();
+
+    }
+
+    private void SetLevelData()
+    {
         var data = GlobalData.Instance.playerDataMap[level.Value];
         maxExp = data.maxExp;
-        hp = data.hp;
-        mp = data.mp;
-    
-    
+        hp = maxHp = data.maxHp; //초기화하는 부분이니까 레벨이 변할 때마다 현재 상태와 최대값을 기본값으로 초기화
+        mp = maxMp = data.maxMp;
     }
 
     new protected void OnDestroy()
@@ -169,10 +173,12 @@ public class Player : Character
         exp.Value += rewardExp;
 
         //최대 경험치를 넘으면 레벨 업!
-        //maxExp
+        if(exp.Value >= maxExp)
+        {
+            SetLevelData(); //레벨이 오르면 hp,mp회복
 
-        //레벨이 오르면 hp,mp회복하면서 최대값도 증가
-
+            CenterNotifyUI.Instance.Show($"lv{level}이 되었습니다.");
+        }
 
         //PlayerPrefs.SetInt("exp", exp); //플레이어의 경험치를 저장
         //PlayerPrefs.Save(); //SetInt에서 지정한 키의 exp 값을 저장
