@@ -181,11 +181,13 @@ public class Player : Character
         if (exp.Value >= maxExp)
         {
             exp.Value = exp.Value - maxExp;  //exp를 0으로 만드는 부분
+            //원래는 SetLevelData()밑에서 실행했는데 그렇게 하면 exp값이 음수가 되어버려서 이걸 먼저 실행한 뒤에 
+            //SetLevelData()해주도록 위치 변경
 
             level.Value++; //레벨의 값이 증가해야 맵에서 읽어올 수 있다. 
             SetLevelData(); //레벨이 오르면 hp,mp회복
 
-            CenterNotifyUI.Instance.Show($"lv{level}이 되었습니다.");
+            CenterNotifyUI.Instance.Show($"Lv{level}이 되었습니다.");
         }
 
         //PlayerPrefs.SetInt("exp", exp); //플레이어의 경험치를 저장
