@@ -27,7 +27,12 @@ public class Player : Character
     {
         exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
         level = new SaveInt("level" + ID); //키는 절대 중복되면 안된다!
-        maxExp = level.Value * 10; //보통은 더 복잡한 데이터테이플로 레벨에 따른 값을 설정하지만 일단은 이렇게!
+        //maxExp = level.Value * 10; //보통은 더 복잡한 데이터테이플로 레벨에 따른 값을 설정하지만 일단은 이렇게!
+        maxExp = GlobalData.Instance.playerDatas.Find(x => x.level == level.Value).maxExp;
+        //리스트의 인덱스 순서와 관계 없이 플레이어의 레벨과 리스트에 있는 레벨이 같아야 호출되는 코드
+        //성능 저하가 생길 수도 있는 코드지만 그렇게 성능 저하가 체감될만큼 빈번하게 호출되지 않기 때문에 이렇게 사용.
+        //딕셔너리로 하면 리스트의 인덱스가 꼬이더라도 상관이 없지만 딕셔너리로 하게 되면 인스펙터에서 확인이 불가하기 때문에
+        //일단은 리스트로 사용.. ! 
     }
 
     new protected void OnDestroy()
