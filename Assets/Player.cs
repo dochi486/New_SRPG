@@ -29,6 +29,14 @@ public class Player : Character
         Players.Remove(this);
     }
 
+    [ContextMenu("저장확인 테스트")] //꼭 플레이 중일 때만 테스트 가능
+
+    void TestFn() //플레이를 멈췄다가 다시 실행했을 때 SaveInt, SaveString한 것들이 살아있는지 테스트 하는 함수
+    {
+        exp.Value += 1;
+        comment.Value += "a";
+    }
+
     // Start is called before the first frame update
     void Start()
     {
