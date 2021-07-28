@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +36,12 @@ public class Player : Character
         //List와 map을 사용하는 게 딕셔너리의 값을 노출하는 게 List고 map은 실제 데이터를 담는 딕셔너리로 사용하기 위해서였따!
         SetLevelData();
 
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            AddExp(5);
     }
 
     private void SetLevelData()
@@ -166,14 +171,14 @@ public class Player : Character
     public SaveInt exp, level;
     //public SaveString comment;
     public int maxExp;
- 
+
     private void AddExp(int rewardExp)
     {
         //플레이어의 기존 경험치에 몬스터를 죽이면서 얻은 경험치 추가
         exp.Value += rewardExp;
 
         //최대 경험치를 넘으면 레벨 업!
-        if(exp.Value >= maxExp)
+        if (exp.Value >= maxExp)
         {
             SetLevelData(); //레벨이 오르면 hp,mp회복
 
