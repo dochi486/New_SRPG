@@ -73,7 +73,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     internal IEnumerator TakeHitCo(int power)
     {
         GameObject damageTextGoInResource = (GameObject)Resources.Load("DamageText");
-        var pos = transform.position;
+        var pos = transform.position; //공격 당한 캐릭터의 위치값
         pos.y = 1.71f; //리소스에서 불러오는 데미지텍스트의 y축 값을 항상 고정하여 똑같은 위치에 생성 되도록한다. 
         GameObject damageTextGo = Instantiate(damageTextGoInResource, 
             pos, damageTextGoInResource.transform.rotation, transform); //transform(몬스터)를 부모로 하여 생성된다.
@@ -124,8 +124,8 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     {
         //passableValues = new List<int>(); 
         //passableValues.Add((int)BlockType.Walkable); //지나갈 수 있는 타일을 int로 저장
-        Transform myTr = transform;
-        Vector2Int myPos = myTr.position.ToVector2Int(); //시작지점
+        Transform myTr = transform; //이동하기 전 자기자신의 transform을 넣어준다.
+        Vector2Int myPos = myTr.position.ToVector2Int(); //시작지점(이동하기 전 자기 자신의 위치 저장)
         //자식 오브젝트의 blockinfo 가져오기 <- map 사용 안하게 리팩토링하면서 지운 것
         //map 딕셔너리를 채운다 <- map 사용 안하게 리팩토링하면서 지운 것
 
@@ -182,9 +182,10 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     }
 
 
-    protected bool IsInAttackableArea(Vector3 enemyPosition)
+    protected bool IsInAttackableArea(Vector3 enemyPosition) 
     {
-        Vector2Int enemyPositionVector2 = enemyPosition.ToVector2Int();
+        //적과 자신의 위치를 Vector2Int로 변환한다
+        Vector2Int enemyPositionVector2 = enemyPosition.ToVector2Int(); 
         Vector2Int currentPos = transform.position.ToVector2Int();
 
         foreach (var item in attackableLocalPositions)
