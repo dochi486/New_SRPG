@@ -79,6 +79,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         blockInfoMap[pos].blockType |= addBlockType;
         blockInfoMap[pos].dropItemID = dropItemID;
+        //blockInfoMap[pos].dropItemGo = 
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
     }
