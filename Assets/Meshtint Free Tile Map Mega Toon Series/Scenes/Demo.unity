@@ -25039,6 +25039,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Monster
       objectReference: {fileID: 0}
+    - target: {fileID: 5362774528967013795, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
+      propertyPath: dropItemGroup.ratio
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5362774528967013795, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
+      propertyPath: dropItemGroup.dropItemID
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6524290680066631363, guid: 60b1f1b47f64216478584cc89b956e74, type: 3}
       propertyPath: m_RootOrder
       value: 5

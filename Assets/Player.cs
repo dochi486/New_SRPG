@@ -20,7 +20,7 @@ public class Player : Character
         base.Awake();
         Players.Add(this);
         //comment = new SaveString("comment" + ID);
-
+        InitLevelData();
     }
 
     private void InitLevelData() //레벨과 경험치, 최대 경험치를 초기화하는 함수
@@ -75,7 +75,7 @@ public class Player : Character
         GroundManager.Instance.AddBlockInfo(transform.position, BlockType.Player, this); //플레이어가 처음에 서 있는 블록은 walkable밖에 지정 안되어있다.
         //현재 플레이어가 있는 블록(walkable)에 player타입도 지정
         FollowTarget.Instance.SetTarget(transform);
-        InitLevelData();
+        //InitLevelData();
     }
 
     internal void MoveToPosition(Vector3 position)
