@@ -102,7 +102,12 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
 
     protected virtual void OnDestroy()
     {
-        GroundManager.Instance?.RemoveBlockInfo(transform.position, GetBlockType()); //null을 리턴할 때 실행 안되도록 ?조건 추가해서 수정
+        if (GroundManager.ApplicationQuit == false)
+            return;
+
+        GroundManager.Instance.RemoveBlockInfo(transform.position, GetBlockType()); 
+        //null을 리턴할 때 실행 안되도록 ?조건 추가해서 수정했었으나 위의 if문 추가하는 게 조금 더 나은 방법이라 또 수정!
+            
         //그라운드매니저가 먼저 파괴되고 난 뒤에 OnDestroy 안의 윗부분이 호출되어서 널레퍼런스 오류가 계속 발생했다. 
 
     }
