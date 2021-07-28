@@ -188,12 +188,14 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         Vector2Int enemyPositionVector2 = enemyPosition.ToVector2Int(); 
         Vector2Int currentPos = transform.position.ToVector2Int();
 
-        foreach (var item in attackableLocalPositions)
+        foreach (var item in attackableLocalPositions) //공격 가능한 범위에 적이 있는지 모든 공격 가능한 위치에 적이 있는지 확인
         {
+            //pos는 공격 가능한 월드 포지션
+            //item에는 공격 가능한 범위의 로컬 포지션이 들어있으니 현재 포지션을 더해서 월드 포지션으로 바꾼다. ?
             Vector2Int pos = item + currentPos;
 
-            if (pos == enemyPositionVector2)
-                return true;
+            if (pos == enemyPositionVector2) //공격할 위치와 적의 위치가 같으면
+                return true; //공격 가능한 범위에 적이 있다고 true반환
         }
         return false;
     }
@@ -202,7 +204,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
         transform.LookAt(attackTarget.transform); 
 
         animator.Play("Attack");
-        StartCoroutine(attackTarget.TakeHitCo(power));
+        StartCoroutine(attackTarget.TakeHitCo(power)); //공격 타겟의 피격코루틴 TakeHitCo를 실행
         yield return new WaitForSeconds(attackTime);
 
         completeAct = true;
