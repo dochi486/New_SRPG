@@ -14848,15 +14848,15 @@ MonoBehaviour:
   - level: 1
     hp: 20
     mp: 10
+    maxExp: 10
+  - level: 2
+    hp: 30
+    mp: 20
+    maxExp: 20
+  - level: 3
+    hp: 40
+    mp: 30
     maxExp: 30
-  - level: 2
-    hp: 30
-    mp: 20
-    maxExp: 40
-  - level: 2
-    hp: 30
-    mp: 20
-    maxExp: 40
 --- !u!4 &1357554207
 Transform:
   m_ObjectHideFlags: 0
