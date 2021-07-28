@@ -21,7 +21,7 @@ public class Player : Character
         Players.Add(this);
         exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
         level = new SaveInt("level" + ID); //키는 절대 중복되면 안된다!
-        comment = new SaveString("comment" + ID);
+        //comment = new SaveString("comment" + ID);
     }
     new protected void OnDestroy()
     {
@@ -29,13 +29,13 @@ public class Player : Character
         Players.Remove(this);
     }
 
-    [ContextMenu("저장확인 테스트")] //꼭 플레이 중일 때만 테스트 가능
+    //[ContextMenu("저장확인 테스트")] //꼭 플레이 중일 때만 테스트 가능
 
-    void TestFn() //플레이를 멈췄다가 다시 실행했을 때 SaveInt, SaveString한 것들이 살아있는지 테스트 하는 함수
-    {
-        exp.Value += 1;
-        comment.Value += "a";
-    }
+    //void TestFn() //플레이를 멈췄다가 다시 실행했을 때 SaveInt, SaveString한 것들이 살아있는지 테스트 하는 함수
+    //{
+    //    exp.Value += 1;
+    //    //comment.Value += "a";
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -139,7 +139,7 @@ public class Player : Character
     }
 
     public SaveInt exp, level;
-    public SaveString comment;
+    //public SaveString comment;
     public int maxExp;
  
     private void AddExp(int rewardExp)
