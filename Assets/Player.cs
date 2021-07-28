@@ -115,19 +115,31 @@ public class Player : Character
     {
         yield return AttackTargetCo(monster);
 
-        //if (monster.status == StatusType.Die)
-        //{
-        //    AddExp(monster.rewardExp);
-        //}
+        if (monster.status == StatusType.Die)
+        {
+            AddExp(monster.rewardExp);
+        }
 
         StageManager.GameState = GameStateType.SelectPlayer;
         //기존 AttackTarget 코루틴이 끝난 다음에 실행되도록 해야 플레이어가 정상적으로 공격하고 GameState가 변하도록 작동한다. 
         //코루틴으로 한 번 더 감싸서 몬스터와 플레이어가 똑같은 AttackTargetCo 메서드를 사용할 수 있도록 바꿔줬다. 
     }
 
-    private void AddExp(object rewardExp)
+    public int exp, level;
+    public int maxExp;
+
+    private void AddExp(int rewardExp)
     {
-        throw new NotImplementedException();
+        //플레이어의 기존 경험치에 몬스터를 죽이면서 얻은 경험치 추가
+
+
+        //최대 경험치를 넘으면 레벨 업!
+
+
+        PlayerPrefs.SetInt("exp", exp); //플레이어의 경험치를 저장
+        PlayerPrefs.Save(); //SetInt에서 지정한 키의 exp 값을 저장
+
+        exp = PlayerPrefs.GetInt("exp"); // PlayerPrefs로 저장한 값을 불러오는 것
     }
 
     private bool IsEnemyExist(BlockInfo blockInfo)
