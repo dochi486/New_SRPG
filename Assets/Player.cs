@@ -163,7 +163,8 @@ public class Player : Character
         {
             AddExp(monster.rewardExp);
 
-            DropItem(monster.dropGroupID); //몬스터가 가지고 있는 드롭아이템그룹 아이디를 가지고 그 아이템 그룹을 드랍시킨다. 
+            if (monster.dropItemGroup.ratio > Random.Range(0, 1f))
+                DropItem(monster.dropItemGroup.dropItemID); //몬스터가 가지고 있는 드롭아이템그룹 아이디를 가지고 그 아이템 그룹을 드랍시킨다. 
 
 
         }
@@ -171,6 +172,12 @@ public class Player : Character
         StageManager.GameState = GameStateType.SelectPlayer;
         //기존 AttackTarget 코루틴이 끝난 다음에 실행되도록 해야 플레이어가 정상적으로 공격하고 GameState가 변하도록 작동한다. 
         //코루틴으로 한 번 더 감싸서 몬스터와 플레이어가 똑같은 AttackTargetCo 메서드를 사용할 수 있도록 바꿔줬다. 
+    }
+
+    [ContextMenu("드랍 테스트")]
+    void DropTestTemp()
+    {
+        DropItem(1);
     }
 
     private void DropItem(int dropGroupID)

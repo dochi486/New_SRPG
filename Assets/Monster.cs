@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Monster : Character
 {
-    public int dropGroupID; //몬스터가 죽을 때 그룹 아이디를 사용해서 글로벌 데이터의 맵 참조해서 아이템 드랍!
+    public ItemDropInfo dropItemGroup; //몬스터가 죽을 때 그룹 아이디를 사용해서 글로벌 데이터의 맵 참조해서 아이템 드랍!
     public static List<Monster> Monsters = new List<Monster>(); //static이라서 이름을 대문자로 시작
     public int rewardExp = 5;
 
