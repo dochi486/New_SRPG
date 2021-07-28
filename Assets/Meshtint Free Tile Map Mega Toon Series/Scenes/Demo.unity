@@ -14846,16 +14846,16 @@ MonoBehaviour:
   completeUiInite: 0
   playerDatas:
   - level: 1
-    hp: 20
-    mp: 10
+    maxHp: 20
+    maxMp: 10
     maxExp: 10
   - level: 2
-    hp: 30
-    mp: 20
+    maxHp: 30
+    maxMp: 20
     maxExp: 20
   - level: 3
-    hp: 40
-    mp: 30
+    maxHp: 40
+    maxMp: 30
     maxExp: 30
 --- !u!4 &1357554207
 Transform:
