@@ -34,7 +34,7 @@ public class SaveIntPropertyDrawer : PropertyDrawer
 }
 #endif
 
-[Serializable]
+[System.Serializable]
 public class SaveInt 
 {
     [SerializeField]
