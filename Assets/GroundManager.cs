@@ -74,12 +74,17 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         }
     }
 
-    public void AddBlockInfo(Vector3 position, BlockType addBlockType, int dropItemID) //드랍된 아이템 정보를 블럭에 추가하는 함수
+    public void AddBlockInfo(Vector3 position, BlockType addBlockType, ItemData dropItem) //드랍된 아이템 정보를 블럭에 추가하는 함수
     {
+        var dropItemGo = (GameObject)Instantiate(Resources.Load("DropItem"));
+        var sprite = Resources.Load("Icon/" + dropItem.iconName, typeof(Sprite));
+        dropItemGo.GetComponentInChildren<SpriteRenderer>().sprite = (Sprite)sprite;
+        dropItemGo.transform.position = position;
+
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         blockInfoMap[pos].blockType |= addBlockType;
-        blockInfoMap[pos].dropItemID = dropItemID;
-        //blockInfoMap[pos].dropItemGo = 
+        blockInfoMap[pos].dropItemID = dropItem.ID;
+        blockInfoMap[pos].dropItemGo = dropItemGo;
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
     }
@@ -87,6 +92,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
     //블록에 추가로 타입을 넣어주기 위한 함수 
     public void AddBlockInfo(Vector3 position, BlockType addBlockType, Character character)
     {
+
         // 실행한 곳의 position 정보를 담고 있는 pos를 생성
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
         // 만일 pos의 값이 map에 저장한 블록들의 위치와 일치하는게 없다면

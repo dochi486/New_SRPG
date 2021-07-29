@@ -191,7 +191,7 @@ public class Player : Character
         var dropItem = GlobalData.Instance.itemDataMap[dropItemRatioInfo.dropItemID];
         print(dropItem.ToString());
 
-        GroundManager.Instance.AddBlockInfo(position.Value, BlockType.Item, dropItem.ID);
+        GroundManager.Instance.AddBlockInfo(position.Value, BlockType.Item, dropItem);
     }
 
     public SaveInt exp, level;

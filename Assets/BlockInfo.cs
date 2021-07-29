@@ -96,9 +96,9 @@ public class BlockInfo : MonoBehaviour
             case GameStateType.SelectAttackTarget:
                 SelectAttackTarget();
                 break;
-            case GameStateType.AttackToTarget:
-                AttackToTarget();
-                break;
+            //case GameStateType.AttackToTarget:
+            //    AttackToTarget();
+            //    break;
             case GameStateType.NotInit:
             case GameStateType.PlayerMoving:
             case GameStateType.MonsterTurn:
@@ -123,10 +123,10 @@ public class BlockInfo : MonoBehaviour
         //Player.SelectedPlayer.OnTouch(transform.position);
     }
 
-    private void AttackToTarget()
-    {
-        throw new NotImplementedException();
-    }
+    //private void AttackToTarget()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     private void SelectAttackTarget()
     {
@@ -244,6 +244,7 @@ public class BlockInfo : MonoBehaviour
     GameObject debugTextGos; // DebugTextPrefab를 생성해서 게임오브젝트로 저장할 변수
     internal Character character;
     public int dropItemID;
+    internal GameObject dropItemGo;
 
     internal void UpdateDebugInfo()
     {
