@@ -162,6 +162,7 @@ public class Player : Character
     }
 
     public PlayerData data;
+    [System.Serializable]
     public class PlayerData
     {
         public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트

@@ -14835,6 +14835,10 @@ MonoBehaviour:
     maxHp: 60
     maxMp: 50
     maxExp: 50
+  - level: 6
+    maxHp: 70
+    maxMp: 60
+    maxExp: 60
   itemDatas:
   - ID: 1
     equipLevel: 1
