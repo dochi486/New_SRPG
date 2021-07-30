@@ -14827,6 +14827,10 @@ MonoBehaviour:
     maxHp: 40
     maxMp: 30
     maxExp: 30
+  - level: 4
+    maxHp: 50
+    maxMp: 40
+    maxExp: 40
   itemDatas:
   - ID: 1
     equipLevel: 1
@@ -14843,6 +14847,11 @@ MonoBehaviour:
     sellPrice: 50
     buyPrice: 180
     iconName: book
+  - ID: 4
+    equipLevel: 1
+    sellPrice: 50
+    buyPrice: 180
+    iconName: axe
   dropItemGroupDatas:
   - ID: 1
     dropItems:
