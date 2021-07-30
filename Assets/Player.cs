@@ -249,11 +249,11 @@ public class Player : Character
     public int exp
     {
         set { data.exp = value; }
-        get { return data.level; }
+        get { return data.exp; }
     }
     public int level
     {
-        set { data.exp = value; }
+        set { data.level = value; }
         get { return data.level; }
     }
     //public SaveString comment;
