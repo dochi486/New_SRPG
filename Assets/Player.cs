@@ -61,6 +61,23 @@ public class Player : Character
     {
         base.OnDestroy();
         Players.Remove(this);
+
+        SaveData();
+    }
+
+    private void SaveData() //json에 플레이어의 정보를 저장하여 앱을 재시작해도 정보 불러올 수 있게한다. 
+    {
+        string json = JsonUtility.ToJson(data);
+
+        try
+        {
+            PlayerPrefs.SetString(PlayerDataKey, json);
+            Debug.Log("json:" + json);
+        }
+        catch(System.Exception err)
+        {
+            Debug.Log("Got:" + err);
+        }
     }
 
     //[ContextMenu("저장확인 테스트")] //꼭 플레이 중일 때만 테스트 가능
