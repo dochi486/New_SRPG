@@ -140,9 +140,10 @@ public class Player : Character
         }
     }
 
+    public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
     private void AddItem(int itemID) //다른 로직과 섞이지 않도록 새로 함수 구현!
     {
-        throw new System.NotImplementedException();
+        myItem.Add(itemID); //itemID가 myItem리스트에 들어가도록 한다.
     }
 
     public void ClearEnemyExistPoint()
