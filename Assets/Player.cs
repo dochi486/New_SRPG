@@ -25,8 +25,12 @@ public class Player : Character
 
     private void InitLevelData() //레벨과 경험치, 최대 경험치를 초기화하는 함수
     {
-        exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
-        level = new SaveInt("level" + ID, 1); //키는 절대 중복되면 안된다!
+
+        var log = PlayerPrefs.GetString(PlayerDataKey);
+        print(log);
+        data = JsonUtility.FromJson<PlayerData>(log);
+        //exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
+        //level = new SaveInt("level" + ID, 1); //키는 절대 중복되면 안된다!
         //maxExp = level.Value * 10; //보통은 더 복잡한 데이터테이플로 레벨에 따른 값을 설정하지만 일단은 이렇게!
         //maxExp = GlobalData.Instance.playerDatas.Find(x => x.level == level.Value).maxExp;
         //maxExp = GlobalData.Instance.playerDataMap[level.Value].maxExp;
@@ -47,7 +51,7 @@ public class Player : Character
 
     private void SetLevelData()
     {
-        var data = GlobalData.Instance.playerDataMap[level.Value];
+        var data = GlobalData.Instance.playerDataMap[level];
         maxExp = data.maxExp;
         hp = maxHp = data.maxHp; //초기화하는 부분이니까 레벨이 변할 때마다 현재 상태와 최대값을 기본값으로 초기화
         mp = maxMp = data.maxMp;
@@ -140,10 +144,20 @@ public class Player : Character
         }
     }
 
-    public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
+    public PlayerData data;
+    public class PlayerData
+    {
+        public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
+        public int exp;
+        public int level;
+
+    }
+
+    string PlayerDataKey => "PlayerData" + ID;
+
     private void AddItem(int itemID) //다른 로직과 섞이지 않도록 새로 함수 구현!
     {
-        myItem.Add(itemID); //itemID가 myItem리스트에 들어가도록 한다.
+        data.myItem.Add(itemID); //itemID가 myItem리스트에 들어가도록 한다.
     }
 
     public void ClearEnemyExistPoint()
@@ -215,23 +229,32 @@ public class Player : Character
         GroundManager.Instance.AddBlockInfo(position.Value, BlockType.Item, dropItem);
     }
 
-    public SaveInt exp, level;
+    public int exp
+    {
+        set { data.exp = value; }
+        get { return data.level; }
+    }
+    public int level
+    {
+        set { data.exp = value; }
+        get { return data.level; }
+    }
     //public SaveString comment;
     public int maxExp;
 
     private void AddExp(int rewardExp)
     {
         //플레이어의 기존 경험치에 몬스터를 죽이면서 얻은 경험치 추가
-        exp.Value += rewardExp;
+        exp += rewardExp;
 
         //최대 경험치를 넘으면 레벨 업!
-        if (exp.Value >= maxExp)
+        if (exp >= maxExp)
         {
-            exp.Value = exp.Value - maxExp;  //exp를 0으로 만드는 부분
+            exp = exp - maxExp;  //exp를 0으로 만드는 부분
             //원래는 SetLevelData()밑에서 실행했는데 그렇게 하면 exp값이 음수가 되어버려서 이걸 먼저 실행한 뒤에 
             //SetLevelData()해주도록 위치 변경
 
-            level.Value++; //레벨의 값이 증가해야 맵에서 읽어올 수 있다. 
+            level++; //레벨의 값이 증가해야 맵에서 읽어올 수 있다. 
             SetLevelData(); //레벨이 오르면 hp,mp회복
 
             CenterNotifyUI.Instance.Show($"Lv{level}이 되었습니다.");
