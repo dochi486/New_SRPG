@@ -95,7 +95,6 @@ public class Player : Character
     //    //comment.Value += "a";
     //}
 
-    // Start is called before the first frame update
     void Start()
     {
         //SelectedPlayer = this; //왜 주석처리했을까?
