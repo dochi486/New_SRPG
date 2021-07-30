@@ -53,6 +53,9 @@ public class Player : Character
 
     private void SetLevelData()
     {
+        if (GlobalData.Instance.playerDataMap.ContainsKey(level) == false)
+            Debug.LogError($"{level}레벨 정보가 없습니다");
+
         var data = GlobalData.Instance.playerDataMap[level];
         maxExp = data.maxExp;
         hp = maxHp = data.maxHp; //초기화하는 부분이니까 레벨이 변할 때마다 현재 상태와 최대값을 기본값으로 초기화
