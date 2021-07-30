@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -51,7 +50,7 @@ public class ContextMenuUI : BaseUI<ContextMenuUI>
     {
         base.Show();
 
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(), 
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent.GetComponent<RectTransform>(),
             uiPosition, null, out Vector2 localPoint);
 
         RectTransform rt = GetComponent<RectTransform>();

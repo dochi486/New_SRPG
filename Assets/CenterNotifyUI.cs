@@ -9,7 +9,7 @@ public class CenterNotifyUI : SingletonMonoBehavior<CenterNotifyUI>
     Text contentText;
     CanvasGroup canvasGroup;
 
-    protected override void OnInit()
+    protected override void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         contentText = transform.Find("ContentText").GetComponent<Text>();
