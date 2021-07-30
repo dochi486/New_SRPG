@@ -234,7 +234,7 @@ public class BlockInfo : MonoBehaviour
 
     static List<BlockInfo> highLightedMoveableArea = new List<BlockInfo>();
 
-    private void ClearMoveableArea()
+    public static void ClearMoveableArea()
     {
         highLightedMoveableArea.ForEach(x => x.ChangeToOriginalColor());
         highLightedMoveableArea.Clear();

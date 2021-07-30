@@ -18,7 +18,7 @@ public class CenterNotifyUI : SingletonMonoBehavior<CenterNotifyUI>
 
     internal void Show(string text, float visibleTime = 3)
     {
-        OnInit();
+     
         base.Show();
         canvasGroup.alpha = 1;
 

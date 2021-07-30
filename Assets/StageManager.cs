@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 
@@ -36,7 +35,17 @@ public class StageManager : SingletonMonoBehavior<StageManager>
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse1))
-            ContextMenuUI.Instance.Show(Input.mousePosition);
+            if (GameState == GameStateType.SelectMoveBlockOrAttackTarget)
+            {
+                Player.SelectedPlayer = null;
+                BlockInfo.ClearMoveableArea();
+                GameState = GameStateType.SelectPlayer;
+            }
+            else
+            {
+                ContextMenuUI.Instance.Show(Input.mousePosition);
+            }
+
     }
     internal void EndTurnPlayer()
     {
