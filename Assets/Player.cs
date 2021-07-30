@@ -39,7 +39,7 @@ public class Player : Character
 
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
             AddExp(5);
@@ -124,7 +124,27 @@ public class Player : Character
             StageManager.GameState = GameStateType.SelectAttackTarget;
         else
             StageManager.GameState = GameStateType.SelectPlayer;
+
+        //도착한 지점에 아이템이 있다면 획득한다.
+        var intPos = transform.position.ToVector2Int();
+        //어떤 아이템이 있는지 확인
+        int itemID = GroundManager.Instance.blockInfoMap[intPos].dropItemID;
+        if(itemID > 0) //itemID가 0보다 크면 아이템이 존재한다는 뜻이므로 획득하게 한다. 
+        {
+            //플레이어가 아이템을 획득하고
+            AddItem(itemID);
+
+            //블럭에서 아이템의 정보를 삭제한다.
+            GroundManager.Instance.RemoveItem(transform.position); //아이템 스프라이트, 블럭타입 모두를 삭제하는 메서드 새로 생성
+            //GroundManager.Instance.RemoveBlockInfo(transform.position, BlockType.Item);
+        }
     }
+
+    private void AddItem(int itemID) //다른 로직과 섞이지 않도록 새로 함수 구현!
+    {
+        throw new System.NotImplementedException();
+    }
+
     public void ClearEnemyExistPoint()
     {
         enemyExistPoint.ForEach(x => x.ChangeToOriginalColor());

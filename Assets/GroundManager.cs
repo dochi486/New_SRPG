@@ -81,12 +81,13 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         dropItemGo.GetComponentInChildren<SpriteRenderer>().sprite = (Sprite)sprite;
         dropItemGo.transform.position = position;
 
+        var blockInfo = blockInfoMap[position.ToVector2Int()];
         Vector2Int pos = new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.z));
-        blockInfoMap[pos].blockType |= addBlockType;
-        blockInfoMap[pos].dropItemID = dropItem.ID;
-        blockInfoMap[pos].dropItemGo = dropItemGo;
+        blockInfo.blockType |= addBlockType;
+        blockInfo.dropItemID = dropItem.ID;
+        blockInfo.dropItemGo = dropItemGo;
         if (useDebugMode)
-            blockInfoMap[pos].UpdateDebugInfo();
+            blockInfo.UpdateDebugInfo();
     }
 
     //블록에 추가로 타입을 넣어주기 위한 함수 
@@ -121,5 +122,13 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         blockInfoMap[pos].character = null; //캐릭터를 null로 비워준다
         if (useDebugMode)
             blockInfoMap[pos].UpdateDebugInfo();
+    }
+
+    internal void RemoveItem(Vector3 position)
+    {
+        var blockInfo = blockInfoMap[position.ToVector2Int()];
+        blockInfo.dropItemID = 0; //아이템아이디를 0으로 만들고
+        Destroy(blockInfo.dropItemGo); //게임오브젝트도 삭제한 뒤에
+        RemoveBlockInfo(position, BlockType.Item);
     }
 }
