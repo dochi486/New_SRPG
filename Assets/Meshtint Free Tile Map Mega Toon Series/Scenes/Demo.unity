@@ -22112,6 +22112,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
+      propertyPath: data.level
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927451051, guid: 098c57aa950e999469442df41bb0021b, type: 3}
       propertyPath: level.value
       value: 1
       objectReference: {fileID: 0}

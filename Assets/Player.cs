@@ -29,6 +29,8 @@ public class Player : Character
         var log = PlayerPrefs.GetString(PlayerDataKey);
         print(log);
         data = JsonUtility.FromJson<PlayerData>(log);
+        if (data == null) //새로 시작할 때 data의 값이 0이라서 null레퍼런스 오류 나는 것 수정
+            data = new PlayerData();
         //exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
         //level = new SaveInt("level" + ID, 1); //키는 절대 중복되면 안된다!
         //maxExp = level.Value * 10; //보통은 더 복잡한 데이터테이플로 레벨에 따른 값을 설정하지만 일단은 이렇게!
@@ -74,7 +76,7 @@ public class Player : Character
             PlayerPrefs.SetString(PlayerDataKey, json);
             Debug.Log("json:" + json);
         }
-        catch(System.Exception err)
+        catch (System.Exception err)
         {
             Debug.Log("Got:" + err);
         }
@@ -150,7 +152,7 @@ public class Player : Character
         var intPos = transform.position.ToVector2Int();
         //어떤 아이템이 있는지 확인
         int itemID = GroundManager.Instance.blockInfoMap[intPos].dropItemID;
-        if(itemID > 0) //itemID가 0보다 크면 아이템이 존재한다는 뜻이므로 획득하게 한다. 
+        if (itemID > 0) //itemID가 0보다 크면 아이템이 존재한다는 뜻이므로 획득하게 한다. 
         {
             //플레이어가 아이템을 획득하고
             AddItem(itemID);
@@ -165,6 +167,10 @@ public class Player : Character
     [System.Serializable]
     public class PlayerData
     {
+        public PlayerData() //생성자. 레벨의 기본값을 1로 주었다!
+        {
+            level = 1;
+        }
         public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
         public int exp;
         public int level;
