@@ -25,12 +25,13 @@ public class Player : Character
 
     private void InitLevelData() //레벨과 경험치, 최대 경험치를 초기화하는 함수
     {
+        if (data == null) //새로 시작할 때 data의 값이 0이라서 null레퍼런스 오류 나는 것 수정
+            data = new PlayerData();
 
         var log = PlayerPrefs.GetString(PlayerDataKey);
         print(log);
         data = JsonUtility.FromJson<PlayerData>(log);
-        if (data == null) //새로 시작할 때 data의 값이 0이라서 null레퍼런스 오류 나는 것 수정
-            data = new PlayerData();
+
         //exp = new SaveInt("exp" + ID); //키가 항상 달라야 독립된 값을 저장할 수 있기 때문에 ID와 exp를 조합해서 플레이어 각각의 밸류를 가질 수 있따. 
         //level = new SaveInt("level" + ID, 1); //키는 절대 중복되면 안된다!
         //maxExp = level.Value * 10; //보통은 더 복잡한 데이터테이플로 레벨에 따른 값을 설정하지만 일단은 이렇게!
@@ -167,16 +168,18 @@ public class Player : Character
     }
 
     public PlayerData data;
+
     [System.Serializable]
     public class PlayerData
     {
+
+        public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
+        public int exp;
+        public int level;
         public PlayerData() //생성자. 레벨의 기본값을 1로 주었다!
         {
             level = 1;
         }
-        public List<int> myItem = new List<int>(); //가지고 있는 아이템 정보를 담는 리스트
-        public int exp;
-        public int level;
     }
 
     string PlayerDataKey => "PlayerData" + ID;
