@@ -15,15 +15,14 @@ public class FollowTarget : SingletonMonoBehavior<FollowTarget>
         }
     }
 
-    //void LateUpdate() //모든 Update함수가 호출 된 다음에 레이트업데이트
-    //{
-    //    if (target == null)
-    //        return;
+    void LateUpdate() //모든 Update함수가 호출 된 다음에 레이트업데이트
+    {
+        if (target == null)
+            return;
 
-    //    var newPos = target.position + offset;
+        var newPos = target.position + offset;
 
-    //    new
-    //    newPos.y = transform.position.y;
-    //    transform.position = newPos;
-    //}
+        newPos.y = transform.position.y;
+        transform.position = newPos;
+    }
 }
