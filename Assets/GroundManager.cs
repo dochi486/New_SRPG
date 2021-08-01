@@ -52,7 +52,7 @@ public class GroundManager : SingletonMonoBehavior<GroundManager>
         {
             var pos = item.transform.position;
             //Vector2Int intPos = new Vector2Int((int)pos.x, (int)pos.z); // 블록들의 x,z 좌표 저장
-            Vector2Int intPos = pos.ToVector2Int();
+            Vector2Int intPos = pos.ToVector2Int(); //위의 결과와 똑같고 확장함수 사용하도록 변경
             //map[intPos] = item.blockType; //맵 정보 초기화(dictionary에 (블록의 위치, 블록의 타입) 저장)
 
             if (useDebugMode)
