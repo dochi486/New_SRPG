@@ -18,6 +18,7 @@ static public class GroundExtension //Mathf.RoundToInt 매번 쓰니까 확장�
     {
         return new Vector3(Mathf.Round(v3.x), v3.y, Mathf.Round(v3.z));
     }
+    
 }
 
 
