@@ -24704,7 +24704,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: <size=10>SSABI</size>
+  m_Text: <color=red>red</color>
 --- !u!222 &2117447407
 CanvasRenderer:
   m_ObjectHideFlags: 0
