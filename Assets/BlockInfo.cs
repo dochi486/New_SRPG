@@ -207,7 +207,7 @@ public class BlockInfo : MonoBehaviour
     private void ShowMoveableDistance(int moveDistance)
     {
         //Vector2Int currentPos = transform.position.ToVector2Int();
-        Quaternion rotate = Quaternion.Euler(0, 45, 0); //여긴 왜 회전시키는 거지?
+        Quaternion rotate = Quaternion.Euler(0, 45, 0); //다이아몬드형으로 이동 가능한 영역을 표시해야하기 때문에 사각형을 45도만큼 회전
         Vector3 halfExtents = (moveDistance / Mathf.Sqrt(2)) * 0.99f * Vector3.one;
 
         var blocks = Physics.OverlapBox(transform.position, halfExtents, rotate);
