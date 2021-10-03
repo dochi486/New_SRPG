@@ -8,12 +8,12 @@ using UnityEngine;
 
 public enum BlockType
 {
-    None = 0,
+    None =     0,
     Walkable = 1 << 0,
-    Water = 1 << 1,
-    Player = 1 << 2,
-    Monster = 1 << 3,
-    Item = 1 << 4,
+    Water =    1 << 1,
+    Player =   1 << 2,
+    Monster =  1 << 3,
+    Item =     1 << 4,
 }
 
 public class BlockInfo : MonoBehaviour

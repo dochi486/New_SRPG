@@ -74,7 +74,7 @@ public class Character : MonoBehaviour //플레이어와 몬스터에 대한 기
     {
         GameObject damageTextGoInResource = (GameObject)Resources.Load("DamageText");
         var pos = transform.position; //공격 당한 캐릭터의 위치값
-        pos.y = 1.71f; //리소스에서 불러오는 데미지텍스트의 y축 값을 항상 고정하여 똑같은 위치에 생성 되도록한다. 
+        pos.y = 1.71f; //리소스에서 불러오는 데미지텍스트의 y축 값을 항상 고정하여 똑같은 위치에 생성되도록한다. 
         GameObject damageTextGo = Instantiate(damageTextGoInResource, 
             pos, damageTextGoInResource.transform.rotation, transform); //transform(몬스터)를 부모로 하여 생성된다.
         //damageTextGoInResource.transform.localPosition = new Vector3(0, 1.71f, 0); //몬스터로부터 y축으로 1.3f만큼 위에 데미지텍스트 프리팹 생성

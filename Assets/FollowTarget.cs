@@ -4,6 +4,7 @@ public class FollowTarget : SingletonMonoBehavior<FollowTarget>
 {
     public Transform target;
     public Vector3 offset = new Vector3(0,0,-7);
+    
     public void SetTarget(Transform target) // 타겟의 transform을 가져와 target멤버변수 값 할당
     {
         this.target = target;
