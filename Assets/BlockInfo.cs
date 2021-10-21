@@ -9,11 +9,11 @@ using UnityEngine;
 public enum BlockType
 {
     None =     0,
-    Walkable = 1 << 0,
-    Water =    1 << 1,
-    Player =   1 << 2,
-    Monster =  1 << 3,
-    Item =     1 << 4,
+    Walkable = 1 << 0, //1
+    Water =    1 << 1, //2
+    Player =   1 << 2, //4
+    Monster =  1 << 3, //8
+    Item =     1 << 4, //16
 }
 
 public class BlockInfo : MonoBehaviour
